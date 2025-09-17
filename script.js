@@ -33,10 +33,26 @@ function initNav(){
 function markActiveNav(){
   const links = document.querySelectorAll('header .nav-list a');
   if (!links.length) return;
-  const page = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
+  const norm = (s) => {
+    try{
+      const u = new URL(s, location.origin);
+      let p = (u.pathname || '/').toLowerCase();
+      p = p.replace(/index\.html$/, '').replace(/home\.html$/, '').replace(/\.html$/, '');
+      if (p !== '/' && p.endsWith('/')) p = p.slice(0, -1);
+      if (!p) p = '/';
+      return p;
+    }catch{
+      let p = (s || '/').toLowerCase();
+      p = p.replace(/index\.html$/, '').replace(/home\.html$/, '').replace(/\.html$/, '');
+      if (p !== '/' && p.endsWith('/')) p = p.slice(0, -1);
+      if (!p.startsWith('/')) p = '/' + p;
+      return p || '/';
+    }
+  };
+  const page = norm(location.pathname || '/');
   links.forEach(a => {
-    const href = (a.getAttribute('href') || '').toLowerCase();
-    if (href && page.endsWith(href)) a.classList.add('active');
+    const href = norm(a.getAttribute('href'));
+    if (href === page) a.classList.add('active');
   });
 }
 
