@@ -67,6 +67,9 @@ function setYear(){
   initNav();
   markActiveNav();
   setYear();
+  initReveal();
+  initHeaderShadow();
+  lazyImages();
 })();
 
 // Toast helper: show a short confirmation when mailto CTA is clicked
@@ -207,5 +210,61 @@ if (enq){
     window.location.href = `mailto:info@drelaineloo.com?subject=${mailSub}&body=${body}`;
     showToast('Opening mail client...');
     f.reset();
+  });
+}
+
+/* ------------
+   Reveal on scroll
+   ------------ */
+function initReveal(){
+  const sel = [
+    '.hero .hero-copy', '.hero .hero-figure',
+    '.stats .stat', '.hl-card', '.topic-card', '.about-card', '.pub-card', '.book-card', '.rec-card',
+    '#connect-copy .aud-card', '.contact-card .card-inner',
+    '.gallery-grid .gcard', '.cta-banner .cta-inner > *', '.footer-grid > *'
+  ];
+  const nodes = sel.flatMap(s => Array.from(document.querySelectorAll(s)));
+  if (!nodes.length) return;
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach((e)=>{
+      if (e.isIntersecting){
+        e.target.classList.add('is-visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold:.16, rootMargin:'0px 0px -8% 0px' });
+
+  nodes.forEach((el, i)=>{
+    if (!el.hasAttribute('data-reveal')){
+      let dir = 'up';
+      if (el.matches('.hero .hero-figure, .gallery-grid .gcard:nth-child(2n)')) dir = 'right';
+      if (el.matches('.hero .hero-copy, .gallery-grid .gcard:nth-child(2n+1)')) dir = 'left';
+      el.setAttribute('data-reveal', dir);
+    }
+    el.style.transitionDelay = `${Math.min(i * 0.04, 0.4)}s`;
+    io.observe(el);
+  });
+}
+
+/* ------------
+   Sticky header shadow
+   ------------ */
+function initHeaderShadow(){
+  const h = document.querySelector('.site-header');
+  if (!h) return;
+  const onScroll = ()=>{
+    if (window.scrollY > 6) h.classList.add('is-scrolled');
+    else h.classList.remove('is-scrolled');
+  };
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive:true });
+}
+
+/* ------------
+   Lazy images for performance
+   ------------ */
+function lazyImages(){
+  document.querySelectorAll('img:not([loading])').forEach(img => {
+    img.setAttribute('loading','lazy');
   });
 }

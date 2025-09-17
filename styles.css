@@ -9,6 +9,10 @@
   --brand-2:#a06af7;
   --gold:#d4a24f;
   --ring: 0 0 0 4px rgba(31,59,208,.15);
+  --e-out: cubic-bezier(.2,.9,.2,1);
+  --e-soft: cubic-bezier(.16,.84,.44,1);
+  --dur-1: .45s;
+  --dur-2: .65s;
 }
 
 *{box-sizing:border-box}
@@ -21,6 +25,7 @@ body{
   line-height:1.6;
 }
 img{max-width:100%;display:block}
+html{scroll-behavior:smooth}
 
 .container{width:min(1200px, 100% - 2rem); margin-inline:auto}
 .narrow{ margin-inline:auto}
@@ -51,6 +56,7 @@ a:hover{text-decoration:underline}
   backdrop-filter:saturate(140%) blur(8px);
   border-bottom:1px solid #eaeef6;
 }
+.site-header.is-scrolled{background:rgba(255,255,255,.92); box-shadow:0 10px 30px rgba(2,6,23,.06)}
 .header-inner{
   display:flex; align-items:center; justify-content:space-between;
   padding:.75rem 0;
@@ -94,6 +100,11 @@ a:hover{text-decoration:underline}
 .btn-ghost:hover{border-color:#cbd5e1}
 .btn-lg{padding:1rem 1.3rem; font-size:1.05rem}
 
+/* button sheen micro-interaction */
+.btn-primary{position:relative; overflow:hidden}
+.btn-primary::after{content:""; position:absolute; inset:0; background:linear-gradient(120deg, transparent 0%, rgba(255,255,255,.25) 50%, transparent 100%); transform: translateX(-120%);}
+.btn-primary:hover::after{transition: transform .7s var(--e-soft); transform: translateX(120%)}
+
 /* --------
    Intro
    -------- */
@@ -113,6 +124,15 @@ a:hover{text-decoration:underline}
 .stat img{width:28px; height:28px; margin-inline:auto; opacity:.9}
 .stat h3{margin:.5rem 0 .25rem; font-size:1.15rem}
 .stat p{margin:0; color:var(--muted); font-size:.95rem}
+
+/* unified hover lift for cards */
+.stat,.hl-card,.topic-card,.about-card,.pub-card,.book-card,.rec-card,.gcard{
+  transition: transform .25s var(--e-soft), box-shadow .25s var(--e-soft);
+}
+.stat:hover,.hl-card:hover,.topic-card:hover,.about-card:hover,.pub-card:hover,.book-card:hover,.rec-card:hover,.gcard:hover{
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(2,6,23,.08);
+}
 
 /* --------
    Featured logos
@@ -146,6 +166,18 @@ a:hover{text-decoration:underline}
 .gcard{display:block; border-radius:.75rem; overflow:hidden; border:1px solid #eef2ff}
 .gcard img{aspect-ratio: 4 / 3; object-fit:cover; display:block; transition:transform .25s ease}
 .gcard:hover img{transform:scale(1.02)}
+
+/* reveal on scroll utilities */
+[data-reveal]{opacity:0; transform: translateY(12px); filter: blur(2px); transition: opacity var(--dur-2) var(--e-out), transform var(--dur-2) var(--e-out), filter var(--dur-2) var(--e-out)}
+[data-reveal].is-visible{opacity:1; transform:none; filter:none}
+[data-reveal="left"]{transform: translateX(-14px)}
+[data-reveal="right"]{transform: translateX(14px)}
+[data-reveal="zoom"]{transform: scale(.98)}
+
+@media (prefers-reduced-motion: reduce){
+  [data-reveal]{opacity:1 !important; transform:none !important; filter:none !important}
+  .stat,.hl-card,.topic-card,.about-card,.pub-card,.book-card,.rec-card,.gcard{transition:none}
+}
 
 /* --------
    CTA banner
