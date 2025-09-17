@@ -547,3 +547,145 @@ a:hover{text-decoration:underline}
   margin:1rem 0 0; color:var(--muted); font-style:italic;
   background:#f8fbff; border:1px solid #eef4ff; padding:.75rem .9rem; border-radius:.7rem;
 }
+
+/* -----------------------------
+   Page-specific animation accents
+   ----------------------------- */
+.page-index .hero{position:relative; overflow:hidden}
+.page-index .hero::before,
+.page-index .hero::after{
+  content:""; position:absolute; width:38vw; max-width:520px; aspect-ratio:1;
+  border-radius:50%; pointer-events:none; opacity:.32; mix-blend-mode:screen;
+  background:radial-gradient(circle at 50% 50%, rgba(160,106,247,.52), rgba(31,59,208,.22) 48%, transparent 70%);
+  animation:index-orbit 22s ease-in-out infinite;
+}
+.page-index .hero::before{top:-14vw; left:-12vw; animation-delay:-4s}
+.page-index .hero::after{bottom:-18vw; right:-10vw; animation-delay:-12s; background:radial-gradient(circle at 50% 50%, rgba(31,59,208,.36), rgba(212,162,79,.28) 45%, transparent 70%)}
+@keyframes index-orbit{
+  0%,100%{transform:translate3d(0,0,0) scale(1); opacity:.32}
+  25%{transform:translate3d(10%, -8%, 0) scale(1.08); opacity:.4}
+  50%{transform:translate3d(4%, 12%, 0) scale(.94); opacity:.28}
+  75%{transform:translate3d(-12%, 6%, 0) scale(1.05); opacity:.36}
+}
+
+.page-home .hero .grad{background-size:220% 220%; animation:home-gradient 8s ease-in-out infinite}
+@keyframes home-gradient{
+  0%,100%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+}
+.page-home .banner-overlay img{transform-origin:center; animation:home-pan 26s ease-in-out infinite}
+@keyframes home-pan{
+  0%,100%{transform:scale(1) translate3d(0,0,0)}
+  38%{transform:scale(1.07) translate3d(-1.5%, -1.2%, 0)}
+  70%{transform:scale(1.05) translate3d(1.2%, 1%, 0)}
+}
+
+.page-about .hero-figure{position:relative}
+.page-about .hero-figure::after{
+  content:""; position:absolute; inset:-6% -6% -10%; border-radius:1.4rem; pointer-events:none;
+  border:2px solid rgba(160,106,247,.28); box-shadow:0 16px 44px rgba(160,106,247,.22);
+  animation:about-pulse 4.8s ease-in-out infinite;
+}
+@keyframes about-pulse{
+  0%,100%{opacity:.38; transform:scale(1)}
+  50%{opacity:.16; transform:scale(1.05)}
+}
+
+.page-programs .about-card{position:relative; overflow:hidden}
+.page-programs .about-card::before{
+  content:""; position:absolute; inset:-140% -30%; pointer-events:none;
+  background:conic-gradient(from 180deg, rgba(31,59,208,0) 0deg, rgba(31,59,208,.18) 120deg, rgba(160,106,247,.26) 220deg, rgba(212,162,79,.24) 320deg, transparent 360deg);
+  animation:programs-sweep 16s linear infinite;
+}
+@keyframes programs-sweep{to{transform:rotate(360deg)}}
+.page-programs .about-card > *{position:relative}
+
+.page-connect .aud-card{position:relative; overflow:hidden}
+.page-connect .aud-card::after{
+  content:""; position:absolute; inset:-3px; border-radius:1.1rem; pointer-events:none;
+  border:2px solid rgba(31,59,208,.22); box-shadow:0 0 0 rgba(31,59,208,0);
+  animation:connect-glow 6s ease-in-out infinite;
+}
+.page-connect .aud-card:nth-child(odd)::after{animation-delay:1.2s}
+@keyframes connect-glow{
+  0%,100%{opacity:.22; transform:scale(.98)}
+  50%{opacity:.55; transform:scale(1); box-shadow:0 18px 36px rgba(31,59,208,.18)}
+}
+
+.page-speaking .speaking-hero{position:relative; overflow:hidden}
+.page-speaking .speaking-hero::before,
+.page-speaking .speaking-hero::after{
+  content:""; position:absolute; inset:0; pointer-events:none; mix-blend-mode:screen;
+  background:radial-gradient(ellipse at top left, rgba(255,255,255,.28), transparent 65%);
+  animation:speaking-lights 16s ease-in-out infinite;
+}
+.page-speaking .speaking-hero::after{
+  background:radial-gradient(ellipse at top right, rgba(31,59,208,.32), transparent 65%);
+  animation-delay:-8s;
+}
+@keyframes speaking-lights{
+  0%,100%{opacity:.26; transform:translate3d(-4%, -2%, 0) scale(1.05)}
+  50%{opacity:.52; transform:translate3d(6%, 4%, 0) scale(1.12)}
+}
+
+.page-media .hero{position:relative; overflow:hidden}
+.page-media .hero::after{
+  content:""; position:absolute; inset:0; pointer-events:none;
+  background:linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.55) 45%, rgba(255,255,255,0) 70%);
+  opacity:0; transform:translateX(-130%);
+  animation:media-flash 12s ease-in-out infinite;
+}
+@keyframes media-flash{
+  0%,86%,100%{opacity:0; transform:translateX(-130%)}
+  90%{opacity:.45; transform:translateX(0)}
+  94%{opacity:0; transform:translateX(130%)}
+}
+.page-media .gallery-grid .gcard{animation:media-glow 9s ease-in-out infinite}
+.page-media .gallery-grid .gcard:nth-child(odd){animation-delay:-4.5s}
+@keyframes media-glow{
+  0%,100%{box-shadow:0 8px 22px rgba(2,6,23,.07)}
+  50%{box-shadow:0 20px 40px rgba(31,59,208,.18)}
+}
+
+.page-research .badge-row .pill{position:relative; overflow:hidden; background:linear-gradient(135deg, rgba(31,59,208,.08), rgba(160,106,247,.16)); box-shadow:0 8px 20px rgba(31,59,208,.08)}
+.page-research .badge-row .pill::after{
+  content:""; position:absolute; inset:0; pointer-events:none;
+  background:linear-gradient(120deg, transparent 0%, rgba(255,255,255,.7) 45%, transparent 70%);
+  transform:translateX(-120%);
+  animation:research-shine 7s ease-in-out infinite;
+}
+.page-research .badge-row .pill:nth-child(2)::after{animation-delay:.8s}
+.page-research .badge-row .pill:nth-child(3)::after{animation-delay:1.6s}
+.page-research .badge-row .pill:nth-child(4)::after{animation-delay:2.4s}
+
+.page-research .pub-card,
+.page-research .book-card{position:relative; animation:research-elevate 10s ease-in-out infinite}
+.page-research .pub-card:nth-of-type(2){animation-delay:1.3s}
+.page-research .book-card:nth-of-type(2){animation-delay:1.3s}
+@keyframes research-shine{
+  0%,35%{transform:translateX(-120%)}
+  50%{transform:translateX(120%)}
+  65%,100%{transform:translateX(120%)}
+}
+@keyframes research-elevate{
+  0%,100%{transform:translateY(0); box-shadow:0 10px 30px rgba(31,59,208,.08)}
+  50%{transform:translateY(-6px); box-shadow:0 24px 48px rgba(31,59,208,.16)}
+}
+
+@media (prefers-reduced-motion: reduce){
+  .page-index .hero::before,
+  .page-index .hero::after,
+  .page-home .hero .grad,
+  .page-home .banner-overlay img,
+  .page-about .hero-figure::after,
+  .page-programs .about-card::before,
+  .page-connect .aud-card::after,
+  .page-speaking .speaking-hero::before,
+  .page-speaking .speaking-hero::after,
+  .page-media .hero::after,
+  .page-media .gallery-grid .gcard,
+  .page-research .badge-row .pill::after,
+  .page-research .pub-card,
+  .page-research .book-card{animation:none !important; transform:none}
+  .page-research .badge-row .pill{box-shadow:none}
+}
