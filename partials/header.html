@@ -1,14 +1,20 @@
 <header class="site-header">
+  <div class="header-glow" aria-hidden="true"></div>
   <div class="container header-inner">
     <a class="brand" href="/">
-      <img class="brand-mark" src="assets/logo-mark.svg" alt="Dr Elaine mark" onerror="this.style.display='none'" />
-      <span class="brand-text">Dr Elaine Loo</span>
+      <img
+        class="brand-logo"
+        src="assets/images/logo.png"
+        alt="Dr Elaine Loo"
+      />
     </a>
     <button class="nav-toggle" aria-controls="navList" aria-expanded="false">
       <span class="sr-only">Toggle navigation</span>
-      Menu
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
     </button>
-    <nav>
+    <nav class="nav-primary" aria-label="Primary">
       <ul id="navList" class="nav-list">
         <li><a href="/">Home</a></li>
         <li><a href="/about_me">About Me</a></li>
