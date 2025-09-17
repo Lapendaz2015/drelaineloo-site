@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Connect — Dr Elaine Loo</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;600;800&family=Playfair+Display:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+
+    <div data-include="partials/header.html"></div>
+
+    <main id="main">
+      <section class="hero">
+        <div class="container hero-grid">
+          <div>
+            <h1 class="display">Why Connect</h1>
+            <p class="subtitle">
+              When more parents, educators, and leaders live with 5Q, the next
+              generation grows stronger — not in competition, but in
+              contribution. This is how humanity rises in the age of AI.
+            </p>
+
+            <div class="cta-row">
+              <button
+                id="open-booking"
+                class="btn btn-primary btn-lg"
+                type="button"
+              >
+                📩 Book a Strategic Collaboration Call →
+              </button>
+              <a
+                class="btn btn-ghost"
+                href="https://www.drelaineloo.com"
+                target="_blank"
+                rel="noopener"
+                >🌐 www.drelaineloo.com</a
+              >
+            </div>
+          </div>
+
+          <figure class="hero-figure">
+            <img
+              src="assets/hero-stage.jpg"
+              alt="Dr Elaine speaking on stage"
+            />
+          </figure>
+        </div>
+      </section>
+
+      <section class="container intro" id="connect-copy">
+        <div class="narrow connect-layout">
+          <div class="connect-left">
+            <h2 class="section-title">How we can partner</h2>
+            <p class="intro">
+              Choose the area that best fits your organisation or interest —
+              click a card to reveal quick actions.
+            </p>
+
+            <div class="aud-grid" role="list">
+              <article class="aud-card" role="listitem">
+                <div class="aud-icon">
+                  <img src="assets/ic-network.svg" alt="Network icon" />
+                </div>
+                <div>
+                  <h3>For Corporates & Sponsors</h3>
+                  <p>
+                    Support award-winning programs through sponsorships, CSR
+                    partnerships, or employee development initiatives.
+                  </p>
+                </div>
+              </article>
+
+              <article class="aud-card" role="listitem">
+                <div class="aud-icon">
+                  <img src="assets/ic-people.svg" alt="People icon" />
+                </div>
+                <div>
+                  <h3>For Conferences & Media</h3>
+                  <p>
+                    Invite Dr Elaine as a keynote, panelist or media
+                    collaborator to bring global education and leadership to
+                    your audience.
+                  </p>
+                </div>
+              </article>
+
+              <article class="aud-card" role="listitem">
+                <div class="aud-icon">
+                  <img src="assets/ic-globe.svg" alt="Globe icon" />
+                </div>
+                <div>
+                  <h3>Research & Policy Partners</h3>
+                  <p>
+                    Collaborate on research, pilots, and frameworks that
+                    translate science into community impact across borders.
+                  </p>
+                </div>
+              </article>
+
+              <article class="aud-card" role="listitem">
+                <div class="aud-icon">
+                  <img src="assets/ic-book.svg" alt="Book icon" />
+                </div>
+                <div>
+                  <h3>Parents & Educators</h3>
+                  <p>
+                    Host certified Parents First seminars or bring our youth
+                    confidence programs to your schools and centres.
+                  </p>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="container quote">
+        <blockquote>
+          "Because together, we can turn vision into movement — and movement
+          into lasting global impact."
+        </blockquote>
+      </section>
+
+      <section class="container intro" id="contact">
+        <div class="narrow">
+          <h2 class="section-title">Enquire / Contact</h2>
+          <p class="subtitle">
+            Have a question or want to collaborate? Send us a brief enquiry and
+            we'll get back to you.
+          </p>
+
+          <form id="enquiry-form" class="enquiry-form" novalidate>
+            <div class="form-row">
+              <div>
+                <label for="enq-name">Name</label>
+                <input id="enq-name" name="name" type="text" required />
+              </div>
+              <div>
+                <label for="enq-email">Email</label>
+                <input id="enq-email" name="email" type="email" required />
+              </div>
+              <div class="full">
+                <label for="enq-org">Organization (optional)</label>
+                <input id="enq-org" name="org" type="text" />
+              </div>
+              <div class="full">
+                <label for="enq-subject">Subject</label>
+                <input id="enq-subject" name="subject" type="text" required />
+              </div>
+              <div class="full">
+                <label for="enq-message">Message</label>
+                <textarea id="enq-message" name="message" required></textarea>
+              </div>
+            </div>
+
+            <div class="modal-actions">
+              <button type="reset" class="btn btn-ghost">Reset</button>
+              <button type="submit" class="btn btn-primary">
+                Send Enquiry
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <section class="cta-banner">
+        <div class="container cta-inner">
+          <h2 class="grad">Let’s Make It Happen</h2>
+          <div>
+            <a
+              class="btn btn-primary"
+              href="mailto:info@drelaineloo.com?subject=Collaboration"
+              >📧 Email: info@drelaineloo.com</a
+            >
+            <a
+              class="btn btn-ghost"
+              href="https://www.drelaineloo.com"
+              target="_blank"
+              rel="noopener"
+              >🌐 www.drelaineloo.com</a
+            >
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- combined contact information section -->
+    <section class="container contact-info">
+      <div class="narrow">
+        <div class="contact-grid">
+          <div class="follow">
+            <h3 class="section-title">Follow &amp; Engage</h3>
+            <p class="muted">
+              Stay connected for updates, events and thought leadership.
+            </p>
+            <ul class="social-list">
+              <li>
+                <strong>Facebook</strong> – Impact stories &amp; live updates
+              </li>
+              <li><strong>Instagram</strong> – Behind-the-scenes and events</li>
+              <li>
+                <strong>LinkedIn</strong> – Research, thought leadership &amp;
+                professional collaborations
+              </li>
+            </ul>
+          </div>
+
+          <div class="contact-cta">
+            <h3 class="section-title">Let’s make it happen</h3>
+            <p class="intro">📩 Book a Strategic Collaboration Call →</p>
+            <div class="cta-row">
+              <button
+                id="open-booking-3"
+                class="btn btn-primary btn-lg"
+                type="button"
+              >
+                📩 Book a Strategic Collaboration Call
+              </button>
+              <a
+                class="btn btn-ghost"
+                href="mailto:info@drelaineloo.com?subject=Collaboration"
+                >📧 Email</a
+              >
+            </div>
+            <blockquote class="muted" style="margin-top: 1rem">
+              Because together, we can turn vision into movement — and movement
+              into lasting global impact.
+            </blockquote>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div data-include="partials/footer.html"></div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
