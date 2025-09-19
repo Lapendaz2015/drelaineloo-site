@@ -24,6 +24,16 @@ function initNav(){
     toggle.addEventListener('click', () => {
       const shown = nav.classList.toggle('show');
       toggle.setAttribute('aria-expanded', shown ? 'true' : 'false');
+      document.body.classList.toggle('nav-open', shown);
+    });
+    nav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        if (window.matchMedia('(max-width: 960px)').matches){
+          nav.classList.remove('show');
+          toggle.setAttribute('aria-expanded', 'false');
+          document.body.classList.remove('nav-open');
+        }
+      });
     });
     // mark to avoid duplicate bindings in case of re-init
     toggle.hasListener = true;

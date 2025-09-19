@@ -91,7 +91,7 @@ a:hover{text-decoration:underline}
 .brand-text{letter-spacing:.25px; font-size:1.05rem}
 .brand-sub{font-size:.8rem; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:#5f6c80}
 
-.nav-primary{margin-left:auto}
+.nav-primary{margin-left:auto; position:relative; z-index:5}
 .nav-list{display:flex; align-items:center; gap:.4rem; list-style:none; margin:0; padding:0}
 .nav-list li{display:flex}
 .nav-list a{
@@ -624,13 +624,15 @@ button.gcard:focus-visible{outline:3px solid rgba(37,99,235,.35); outline-offset
    Responsive
    -------- */
 @media (max-width: 960px){
-  .nav-primary{position:relative; width:100%;}
+  .header-inner{align-items:center}
+  .nav-primary{position:relative; width:auto; margin-left:auto}
   .nav-toggle{display:flex}
   .nav-list{
     position:absolute;
     top:calc(100% + .75rem);
     right:0;
-    min-width:240px;
+    left:auto;
+    width:min(320px, calc(100vw - 2rem));
     background:rgba(255,255,255,.95);
     border:1px solid rgba(148,163,184,.25);
     box-shadow:0 20px 45px rgba(15,23,42,.12);
@@ -639,8 +641,11 @@ button.gcard:focus-visible{outline:3px solid rgba(37,99,235,.35); outline-offset
     display:none;
     flex-direction:column;
     gap:.35rem;
+    z-index:20;
   }
-  .nav-list.show{display:flex}
+.nav-list.show,
+body.nav-open .nav-list{display:flex}
+body.nav-open{overflow:hidden}
   .nav-list li{width:100%}
   .nav-list a{width:100%; justify-content:flex-start; border-radius:.75rem}
   .nav-list a::after{left:16px; right:16px; bottom:.4rem}
@@ -657,7 +662,7 @@ button.gcard:focus-visible{outline:3px solid rgba(37,99,235,.35); outline-offset
 }
 @media (max-width: 560px){
   .nav-primary{width:auto}
-  .nav-list{right:auto; left:0; min-width:calc(100vw - 2rem);}
+  .nav-list{ width:calc(100vw - 2rem);}
   .stats-grid{grid-template-columns:repeat(2, 1fr)}
   .logo-row{grid-template-columns:repeat(2, 1fr)}
 }
