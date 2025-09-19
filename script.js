@@ -157,9 +157,7 @@ function createModal(){
               <textarea id="notes" name="notes" placeholder="Briefly describe your focus, stakeholders, and desired outcomes"></textarea>
             </div>
           </div>
-          <div class="modal-note">
-            <strong>What happens next?</strong> You will receive a response within two business days with suggested call times and any pre-reading tailored to your context.
-          </div>
+           
           <div class="modal-actions">
             <button type="button" class="btn btn-ghost modal-close">Cancel</button>
             <button type="submit" class="btn btn-primary">Send request</button>
