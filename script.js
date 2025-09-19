@@ -70,6 +70,7 @@ function setYear(){
   initReveal();
   initHeaderShadow();
   lazyImages();
+  initImageLightbox();
 })();
 
 // Toast helper: show a short confirmation when mailto CTA is clicked
@@ -191,7 +192,7 @@ if (openBtn3) openBtn3.addEventListener('click', ()=>{ createModal(); });
 // Enquiry form handler: validate and open mailto with form values
 const enq = document.getElementById('enquiry-form');
 if (enq){
-  enq.addEventListener('submit', (ev)=>{
+  enq.addEventListener('submit', async (ev)=>{
     ev.preventDefault();
     const f = ev.target;
     const name = f.querySelector('#enq-name').value.trim();
@@ -205,11 +206,35 @@ if (enq){
       return;
     }
 
-    const mailSub = encodeURIComponent(subject);
-    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nOrganization: ${org}\n\n${message}`);
-    window.location.href = `mailto:info@drelaineloo.com?subject=${mailSub}&body=${body}`;
-    showToast('Opening mail client...');
-    f.reset();
+    const submitBtn = f.querySelector('button[type="submit"]');
+    const originalText = submitBtn ? submitBtn.textContent : '';
+    if (submitBtn){
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending...';
+    }
+
+    try {
+      const res = await fetch('/api/send-enquiry', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, org, subject, message })
+      });
+
+      if (!res.ok){
+        throw new Error(`Request failed with status ${res.status}`);
+      }
+
+      showToast('Thanks! We’ll be in touch shortly.');
+      f.reset();
+    } catch (err){
+      console.error(err);
+      showToast('Something went wrong. Please try again.');
+    } finally {
+      if (submitBtn){
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+      }
+    }
   });
 }
 
@@ -267,4 +292,92 @@ function lazyImages(){
   document.querySelectorAll('img:not([loading])').forEach(img => {
     img.setAttribute('loading','lazy');
   });
+}
+
+/* ------------
+   Image lightbox
+   ------------ */
+let lightboxEl;
+let lightboxImg;
+let lightboxCaption;
+let lastFocusedEl;
+
+function initImageLightbox(){
+  const selectors = [
+    '.media-wide img',
+    '.pub-figure img',
+    '.book-figure img',
+    '.endorsement-card img',
+    '.intro-figure img'
+  ];
+  const images = document.querySelectorAll(selectors.join(', '));
+  if (!images.length) return;
+
+  images.forEach(img => {
+    if (img.dataset.lightboxBound || img.closest('a')) return;
+    img.dataset.lightboxBound = 'true';
+    img.classList.add('is-lightbox-enabled');
+    img.setAttribute('tabindex', '0');
+    img.setAttribute('role', 'button');
+    img.setAttribute('aria-label', 'Expand image');
+    img.addEventListener('click', () => openImageLightbox(img));
+    img.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' '){
+        e.preventDefault();
+        openImageLightbox(img);
+      }
+    });
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeImageLightbox();
+  });
+}
+
+function ensureLightbox(){
+  if (lightboxEl) return;
+  lightboxEl = document.createElement('div');
+  lightboxEl.id = 'img-lightbox';
+  lightboxEl.setAttribute('role', 'dialog');
+  lightboxEl.setAttribute('aria-modal', 'true');
+  lightboxEl.setAttribute('aria-hidden', 'true');
+  lightboxEl.innerHTML = `
+    <div class="lightbox-backdrop"></div>
+    <figure class="lightbox-figure">
+      <button class="lightbox-close" type="button" aria-label="Close image">✕</button>
+      <img src="" alt="" />
+      <figcaption></figcaption>
+    </figure>
+  `;
+  document.body.appendChild(lightboxEl);
+  lightboxImg = lightboxEl.querySelector('img');
+  lightboxCaption = lightboxEl.querySelector('figcaption');
+  const closeBtn = lightboxEl.querySelector('.lightbox-close');
+  closeBtn.addEventListener('click', closeImageLightbox);
+  lightboxEl.querySelector('.lightbox-backdrop').addEventListener('click', closeImageLightbox);
+}
+
+function openImageLightbox(img){
+  ensureLightbox();
+  lastFocusedEl = document.activeElement;
+  const src = img.dataset.full || img.currentSrc || img.src;
+  lightboxImg.src = src;
+  lightboxImg.alt = img.alt || '';
+  lightboxCaption.textContent = img.alt || '';
+  lightboxEl.classList.add('is-visible');
+  lightboxEl.setAttribute('aria-hidden', 'false');
+  requestAnimationFrame(() => {
+    lightboxEl.classList.add('is-active');
+  });
+  lightboxEl.querySelector('.lightbox-close').focus();
+}
+
+function closeImageLightbox(){
+  if (!lightboxEl || !lightboxEl.classList.contains('is-visible')) return;
+  lightboxEl.classList.remove('is-active');
+  lightboxEl.setAttribute('aria-hidden', 'true');
+  setTimeout(() => {
+    if (lightboxEl) lightboxEl.classList.remove('is-visible');
+  }, 200);
+  if (lastFocusedEl && typeof lastFocusedEl.focus === 'function'){ lastFocusedEl.focus(); }
 }
