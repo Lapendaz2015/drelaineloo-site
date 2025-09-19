@@ -117,37 +117,48 @@ function createModal(){
   const bd = document.createElement('div'); bd.className = 'modal-backdrop'; bd.id = 'booking-modal';
   bd.innerHTML = `
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="booking-title">
-      <button class="modal-close" aria-label="Close">✕</button>
-      <h3 id="booking-title">Book a Strategic Collaboration Call</h3>
+      <div class="modal-header">
+        <div class="modal-heading">
+          <p class="modal-kicker">Strategic collaboration</p>
+          <h3 id="booking-title">Book a Strategic Collaboration Call</h3>
+          <p class="modal-subhead">
+            Share a few details so we can prepare relevant resources and confirm a time that serves your goals.
+          </p>
+        </div>
+        <button class="modal-close modal-close-icon" type="button" aria-label="Close dialog">✕</button>
+      </div>
       <div class="modal-body">
         <form id="booking-form">
-          <div class="form-row">
-            <div>
+          <div class="form-grid">
+            <div class="field">
               <label for="name">Your name</label>
-              <input id="name" name="name" type="text" required />
+              <input id="name" name="name" type="text" autocomplete="name" required />
             </div>
-            <div>
+            <div class="field">
               <label for="org">Organization</label>
-              <input id="org" name="org" type="text" />
+              <input id="org" name="org" type="text" autocomplete="organization" />
             </div>
-            <div class="full">
+            <div class="field full">
               <label for="email">Email address</label>
-              <input id="email" name="email" type="email" required />
+              <input id="email" name="email" type="email" autocomplete="email" required />
             </div>
-            <div class="full">
+            <div class="field full">
               <label for="role">Which audience best describes you?</label>
               <select id="role" name="role">
-                <option>Corporate / Sponsor</option>
-                <option>Conference / Media</option>
-                <option>Research / Policy</option>
-                <option>Parent / Educator</option>
-                <option>Other</option>
+                <option value="Corporate / Sponsor">Corporate / Sponsor</option>
+                <option value="Conference / Media">Conference / Media</option>
+                <option value="Research / Policy">Research / Policy</option>
+                <option value="Parent / Educator">Parent / Educator</option>
+                <option value="Other">Other</option>
               </select>
             </div>
-            <div class="full">
+            <div class="field full">
               <label for="notes">Notes / objectives</label>
-              <textarea id="notes" name="notes" placeholder="Briefly describe your goal or questions"></textarea>
+              <textarea id="notes" name="notes" placeholder="Briefly describe your focus, stakeholders, and desired outcomes"></textarea>
             </div>
+          </div>
+          <div class="modal-note">
+            <strong>What happens next?</strong> You will receive a response within two business days with suggested call times and any pre-reading tailored to your context.
           </div>
           <div class="modal-actions">
             <button type="button" class="btn btn-ghost modal-close">Cancel</button>
@@ -300,7 +311,11 @@ function lazyImages(){
 let lightboxEl;
 let lightboxImg;
 let lightboxCaption;
+let lightboxPrev;
+let lightboxNext;
 let lastFocusedEl;
+let lightboxItems = [];
+let lightboxIndex = -1;
 
 function initImageLightbox(){
   const selectors = [
@@ -308,29 +323,76 @@ function initImageLightbox(){
     '.pub-figure img',
     '.book-figure img',
     '.endorsement-card img',
-    '.intro-figure img'
+    '.intro-figure img',
+    '.recognition-figure-link img',
+    '.gallery-grid img'
   ];
   const images = document.querySelectorAll(selectors.join(', '));
   if (!images.length) return;
 
   images.forEach(img => {
-    if (img.dataset.lightboxBound || img.closest('a')) return;
+    const link = img.closest('a');
+    const isRecognitionLink = link && link.classList.contains('recognition-figure-link');
+    const galleryTrigger = img.closest('.gallery-item');
+    if (img.dataset.lightboxBound) return;
+    if (link && !isRecognitionLink) return;
     img.dataset.lightboxBound = 'true';
     img.classList.add('is-lightbox-enabled');
+
+    const handleOpen = (e) => {
+      if (e) e.preventDefault();
+      openImageLightbox(img);
+    };
+
+    if (isRecognitionLink){
+      if (!img.dataset.full) img.dataset.full = link.getAttribute('href');
+      link.setAttribute('aria-label', `Expand image${img.alt ? ': ' + img.alt : ''}`);
+      link.addEventListener('click', handleOpen);
+      link.addEventListener('keydown', (e) => {
+        if (e.key === ' '){
+          e.preventDefault();
+          handleOpen();
+        }
+      });
+      return;
+    }
+
+    if (galleryTrigger){
+      if (!galleryTrigger.dataset.lightboxBound){
+        galleryTrigger.dataset.lightboxBound = 'true';
+        galleryTrigger.addEventListener('click', handleOpen);
+        galleryTrigger.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' '){
+            e.preventDefault();
+            handleOpen();
+          }
+        });
+      }
+      return;
+    }
+
     img.setAttribute('tabindex', '0');
     img.setAttribute('role', 'button');
     img.setAttribute('aria-label', 'Expand image');
-    img.addEventListener('click', () => openImageLightbox(img));
+    img.addEventListener('click', handleOpen);
     img.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' '){
         e.preventDefault();
-        openImageLightbox(img);
+        handleOpen();
       }
     });
   });
 
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeImageLightbox();
+    if (!lightboxItems.length || !lightboxEl || !lightboxEl.classList.contains('is-visible')) return;
+    if (e.key === 'ArrowRight'){
+      e.preventDefault();
+      shiftLightbox(1);
+    } else if (e.key === 'ArrowLeft'){
+      e.preventDefault();
+      shiftLightbox(-1);
+    }
   });
 }
 
@@ -345,25 +407,42 @@ function ensureLightbox(){
     <div class="lightbox-backdrop"></div>
     <figure class="lightbox-figure">
       <button class="lightbox-close" type="button" aria-label="Close image">✕</button>
-      <img src="" alt="" />
+      <div class="lightbox-media">
+        <button class="lightbox-nav lightbox-prev" type="button" aria-label="Previous image">
+          <span aria-hidden="true">‹</span>
+        </button>
+        <img src="" alt="" />
+        <button class="lightbox-nav lightbox-next" type="button" aria-label="Next image">
+          <span aria-hidden="true">›</span>
+        </button>
+      </div>
       <figcaption></figcaption>
     </figure>
   `;
   document.body.appendChild(lightboxEl);
   lightboxImg = lightboxEl.querySelector('img');
   lightboxCaption = lightboxEl.querySelector('figcaption');
+  lightboxPrev = lightboxEl.querySelector('.lightbox-prev');
+  lightboxNext = lightboxEl.querySelector('.lightbox-next');
   const closeBtn = lightboxEl.querySelector('.lightbox-close');
   closeBtn.addEventListener('click', closeImageLightbox);
   lightboxEl.querySelector('.lightbox-backdrop').addEventListener('click', closeImageLightbox);
+  lightboxPrev.addEventListener('click', () => shiftLightbox(-1));
+  lightboxNext.addEventListener('click', () => shiftLightbox(1));
 }
 
 function openImageLightbox(img){
   ensureLightbox();
   lastFocusedEl = document.activeElement;
-  const src = img.dataset.full || img.currentSrc || img.src;
-  lightboxImg.src = src;
-  lightboxImg.alt = img.alt || '';
-  lightboxCaption.textContent = img.alt || '';
+  const group = img.dataset.lightboxGroup;
+  if (group){
+    lightboxItems = Array.from(document.querySelectorAll(`img[data-lightbox-group="${group}"]`));
+  } else {
+    lightboxItems = [img];
+  }
+  lightboxIndex = Math.max(0, lightboxItems.indexOf(img));
+  setLightboxImage(lightboxItems[lightboxIndex]);
+  toggleLightboxNav();
   lightboxEl.classList.add('is-visible');
   lightboxEl.setAttribute('aria-hidden', 'false');
   requestAnimationFrame(() => {
@@ -379,5 +458,29 @@ function closeImageLightbox(){
   setTimeout(() => {
     if (lightboxEl) lightboxEl.classList.remove('is-visible');
   }, 200);
+  lightboxItems = [];
+  lightboxIndex = -1;
   if (lastFocusedEl && typeof lastFocusedEl.focus === 'function'){ lastFocusedEl.focus(); }
+}
+
+function setLightboxImage(img){
+  if (!img) return;
+  const src = img.dataset.full || img.currentSrc || img.src;
+  lightboxImg.src = src;
+  lightboxImg.alt = img.alt || '';
+  const caption = img.dataset.caption || img.alt || '';
+  lightboxCaption.textContent = caption;
+}
+
+function shiftLightbox(delta){
+  if (!lightboxItems.length) return;
+  lightboxIndex = (lightboxIndex + delta + lightboxItems.length) % lightboxItems.length;
+  setLightboxImage(lightboxItems[lightboxIndex]);
+  toggleLightboxNav();
+}
+
+function toggleLightboxNav(){
+  if (!lightboxPrev || !lightboxNext) return;
+  const multiple = lightboxItems.length > 1;
+  lightboxPrev.hidden = lightboxNext.hidden = !multiple;
 }
