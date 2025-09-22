@@ -1182,6 +1182,33 @@ body.nav-open{overflow:hidden}
   .media-wide.banner-overlay img{transition:none; transform:none}
 }
 
+/* ---------------------------------
+   MEDIA PAGE — mobile refinements
+   --------------------------------- */
+@media (max-width: 720px){
+  .page-media .hero{padding:clamp(1.6rem, 6vw, 2.2rem) 0}
+  .page-media .hero .cta-row{flex-direction:column; gap:.6rem}
+  .page-media .hero .cta-row .btn{width:100%; justify-content:center}
+
+  .page-media .embed-grid{grid-template-columns:1fr; gap:.9rem}
+  .page-media .fb-embed{min-height:520px; height:auto}
+
+  .page-media .talks-section{padding-top:1.6rem; padding-bottom:1.6rem}
+  .page-media .talks-content{grid-template-columns:1fr}
+  .page-media .talk-media img{width:100%; height:auto}
+
+  .page-media .mentions{padding-top:1.6rem; padding-bottom:1.6rem}
+  .page-media .mentions-inner{padding:1rem}
+  .page-media .mention-groups{grid-template-columns:1fr}
+
+  .page-media .gallery-grid{grid-template-columns:repeat(2, minmax(0, 1fr))}
+}
+
+@media (max-width: 420px){
+  .page-media .fb-embed{min-height:460px}
+  .page-media .gallery-grid{grid-template-columns:1fr}
+}
+
 /* -----------------------------
    Connect engagement section
    ----------------------------- */
@@ -1364,6 +1391,13 @@ body.nav-open{overflow:hidden}
   .page-research .pub-card,
   .page-research .book-card{animation:none !important; transform:none}
   .page-research .badge-row .pill{box-shadow:none}
+}
+
+/* Force single-column talks layout on Media page at mobile widths */
+@media (max-width: 860px){
+  .page-media .talks-section .talks-content{grid-template-columns:1fr !important}
+  .page-media .talks-section .talks-copy{order:2}
+  .page-media .talks-section .talk-media{order:1}
 }
 .mentions{padding-top:clamp(2.6rem, 6vw, 4.4rem); padding-bottom:clamp(2.2rem, 6vw, 4rem)}
 .mentions-inner{background:linear-gradient(160deg, rgba(255,255,255,.92), var(--surface)); border:1px solid rgba(var(--accent-rgb),.3); border-radius:1.2rem; box-shadow:0 20px 44px rgba(129,138,155,.12); padding:clamp(1.8rem, 5vw, 2.6rem); display:grid; gap:clamp(1.2rem, 4vw, 2rem)}

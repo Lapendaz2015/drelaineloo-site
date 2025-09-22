@@ -130,6 +130,7 @@ function setYear(){
   enhanceSmoothAnchors();
   initTilt();
   initPressFeedback();
+  initResponsiveFbEmbeds();
 })();
 
 // Toast helper: show a short confirmation when mailto CTA is clicked
@@ -671,4 +672,76 @@ function toggleLightboxNav(){
   if (!lightboxPrev || !lightboxNext) return;
   const multiple = lightboxItems.length > 1;
   lightboxPrev.hidden = lightboxNext.hidden = !multiple;
+}
+
+/* ------------
+   Responsive Facebook embeds
+   ------------ */
+function initResponsiveFbEmbeds(){
+  const iframes = Array.from(document.querySelectorAll('iframe.fb-embed'));
+  if (!iframes.length) return;
+
+  const parseHref = (src) => {
+    try{
+      const u = new URL(src, location.origin);
+      return u;
+    }catch{
+      return null;
+    }
+  };
+
+  const update = () => {
+    iframes.forEach((el) => {
+      const parent = el.parentElement;
+      if (!parent) return;
+      const maxW = Math.max(280, Math.floor(parent.getBoundingClientRect().width));
+      const isMobile = window.matchMedia('(max-width: 480px)').matches;
+      const targetWidth = Math.min(500, maxW);
+      const aspect = 500/711; // based on provided default size
+      const targetHeight = Math.round(targetWidth / aspect);
+
+      // set element width/height attributes for better FB sizing
+      el.setAttribute('width', String(targetWidth));
+      el.setAttribute('height', String(Math.max(360, targetHeight)));
+      el.style.width = '100%';
+
+      // also adjust width param inside the src URL to let FB render server-side appropriately
+      const parsed = parseHref(el.getAttribute('src'));
+      if (parsed){
+        parsed.searchParams.set('width', String(targetWidth));
+        // keep show_text as-is
+        const newSrc = parsed.toString();
+        if (el.src !== newSrc) el.src = newSrc;
+      }
+
+      // add a small fallback link below iframe on mobile if not present
+      let fallback = el.nextElementSibling;
+      const href = parsed && parsed.searchParams.get('href') ? decodeURIComponent(parsed.searchParams.get('href')) : null;
+      if (isMobile && href){
+        if (!fallback || !(fallback instanceof HTMLAnchorElement) || !fallback.classList.contains('fb-fallback')){
+          const a = document.createElement('a');
+          a.className = 'fb-fallback';
+          a.href = href;
+          a.target = '_blank';
+          a.rel = 'noopener';
+          a.textContent = 'View on Facebook';
+          a.style.display = 'inline-block';
+          a.style.margin = '.35rem 0 .8rem';
+          a.style.fontSize = '.9rem';
+          a.style.color = getComputedStyle(document.documentElement).getPropertyValue('--brand') || '#336699';
+          el.insertAdjacentElement('afterend', a);
+        }
+      } else if (fallback && fallback.classList && fallback.classList.contains('fb-fallback')){
+        fallback.remove();
+      }
+    });
+  };
+
+  // initial and resize observers
+  update();
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(update, 120);
+  }, { passive:true });
 }
