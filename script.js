@@ -127,6 +127,9 @@ function setYear(){
   initHeaderShadow();
   lazyImages();
   initImageLightbox();
+  enhanceSmoothAnchors();
+  initTilt();
+  initPressFeedback();
 })();
 
 // Toast helper: show a short confirmation when mailto CTA is clicked
@@ -308,9 +311,25 @@ if (enq){
    ------------ */
 function initReveal(){
   const sel = [
-    '.hero .hero-copy', '.hero .hero-figure',
+    // hero
+    '.hero .hero-copy', '.hero .hero-figure', '.programs-hero-copy', '.programs-hero-figure',
+    // speaking hero
+    '.speaking-hero .hero-grid > div', '.speaking-hero .hero-figure',
+    // programs sections
+    '.program-section .section-head', '.program-layout article', '.program-layout figure', '.program-block', '.program-gallery .media-wide',
+    // home intro split
+    '.intro-figure', '.intro-copy',
+    // about page sections
+    '.academic-section .academic-stack > figure', '.academic-card', '.recognitions .section-head', '.recognition-card', '.recognition-figure', '.recognition-content',
+    // research page sections
+    '.endorsement-card', '.media-stack .media-wide', '.pub-card', '.book-card', '.video-embed',
+    // media page sections
+    '.embed-grid .fb-embed', '.talks-content .talk-card', '.talk-media', '.mention-card',
+    // connect page sections
+    '#connect-copy .aud-card', '.engage-header', '.engage-follow', '.quote blockquote',
+    // generic cards and sections
     '.stats .stat', '.hl-card', '.topic-card', '.about-card', '.pub-card', '.book-card', '.rec-card',
-    '#connect-copy .aud-card', '.contact-card .card-inner',
+    '.contact-card .card-inner', '.banner-overlay',
     '.gallery-grid .gcard', '.cta-banner .cta-inner > *', '.footer-grid > *'
   ];
   const nodes = sel.flatMap(s => Array.from(document.querySelectorAll(s)));
@@ -327,11 +346,45 @@ function initReveal(){
   nodes.forEach((el, i)=>{
     if (!el.hasAttribute('data-reveal')){
       let dir = 'up';
-      if (el.matches('.hero .hero-figure, .gallery-grid .gcard:nth-child(2n)')) dir = 'right';
-      if (el.matches('.hero .hero-copy, .gallery-grid .gcard:nth-child(2n+1)')) dir = 'left';
+      // hero directions
+      if (el.matches('.hero .hero-figure, .programs-hero-figure, .gallery-grid .gcard:nth-child(2n)')) dir = 'right';
+      if (el.matches('.hero .hero-copy, .programs-hero-copy, .gallery-grid .gcard:nth-child(2n+1)')) dir = 'left';
+      // speaking hero
+      if (el.matches('.speaking-hero .hero-figure')) dir = 'right';
+      if (el.matches('.speaking-hero .hero-grid > div')) dir = 'left';
+      // program layout: alternate by column; flip layout reverses
+      if (el.matches('.program-layout article, .program-layout figure')){
+        const flipped = !!el.closest('.program-layout--flip');
+        const isFigure = el.matches('figure');
+        dir = (!flipped && isFigure) || (flipped && !isFigure) ? 'right' : 'left';
+      }
+      // program blocks: gentle up
+      if (el.matches('.program-block')) dir = 'up';
+      // home intro split
+      if (el.matches('.intro-figure')) dir = 'right';
+      if (el.matches('.intro-copy')) dir = 'left';
+      // about page specifics
+      if (el.matches('.academic-section .academic-stack > figure')) dir = 'right';
+      if (el.matches('.academic-card')) dir = 'up';
+      if (el.matches('.recognition-figure')) dir = 'left';
+      if (el.matches('.recognition-content')) dir = 'right';
+      // research page specifics
+      if (el.matches('.endorsement-card, .pub-card, .book-card')) dir = 'up';
+      if (el.matches('.media-stack .media-wide')) dir = 'right';
+      if (el.matches('.video-embed')) dir = 'zoom';
+      // media page specifics
+      if (el.matches('.embed-grid .fb-embed')) dir = 'zoom';
+      if (el.matches('.talks-content .talk-card')) dir = 'up';
+      if (el.matches('.talk-media')) dir = 'right';
+      if (el.matches('.mention-card')) dir = 'up';
+      // connect page specifics
+      if (el.matches('.engage-header')) dir = 'left';
+      if (el.matches('.engage-follow')) dir = 'right';
+      // quotes
+      if (el.matches('.quote blockquote')) dir = 'zoom';
       el.setAttribute('data-reveal', dir);
     }
-    el.style.transitionDelay = `${Math.min(i * 0.04, 0.4)}s`;
+    el.style.transitionDelay = `${Math.min(i * 0.04, 0.45)}s`;
     io.observe(el);
   });
 }
@@ -356,6 +409,87 @@ function initHeaderShadow(){
 function lazyImages(){
   document.querySelectorAll('img:not([loading])').forEach(img => {
     img.setAttribute('loading','lazy');
+  });
+}
+
+/* ------------
+   Smooth anchors for in-page links
+   ------------ */
+function enhanceSmoothAnchors(){
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest('a[href^="#"]');
+    if (!a) return;
+    const href = a.getAttribute('href');
+    if (!href || href === '#' || href.length < 2) return;
+    const target = document.getElementById(href.slice(1));
+    if (!target) return;
+    e.preventDefault();
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    history.replaceState(null, '', href);
+  }, { passive: false });
+}
+
+/* ------------
+   Interactive tilt for cards/buttons
+   ------------ */
+function initTilt(){
+  const els = document.querySelectorAll('.hl-card, .topic-card, .about-card, .pub-card, .book-card, .rec-card, .gcard, .stat, .btn, .academic-card, .recognition-card, .talk-card, .mention-card, .aud-card');
+  if (!els.length) return;
+  els.forEach(el => {
+    el.classList.add('tiltable');
+    let frame;
+    const maxTilt = 6; // degrees
+    function onMove(ev){
+      const rect = el.getBoundingClientRect();
+      const cx = rect.left + rect.width/2;
+      const cy = rect.top + rect.height/2;
+      const x = (ev.clientX - cx) / (rect.width/2);
+      const y = (ev.clientY - cy) / (rect.height/2);
+      const ry = Math.max(Math.min(x * maxTilt, maxTilt), -maxTilt);
+      const rx = Math.max(Math.min(-y * maxTilt, maxTilt), -maxTilt);
+      if (frame) cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(()=>{
+        el.style.setProperty('--rx', rx.toFixed(2) + 'deg');
+        el.style.setProperty('--ry', ry.toFixed(2) + 'deg');
+      });
+    }
+    function reset(){
+      if (frame) cancelAnimationFrame(frame);
+      el.style.setProperty('--rx', '0deg');
+      el.style.setProperty('--ry', '0deg');
+    }
+    el.addEventListener('mousemove', onMove);
+    el.addEventListener('mouseleave', reset);
+    el.addEventListener('blur', reset);
+  });
+}
+
+/* ------------
+   Press feedback for buttons (scale + active state)
+   ------------ */
+function initPressFeedback(){
+  document.addEventListener('mousedown', (e)=>{
+    const b = e.target.closest('.btn');
+    if (!b) return;
+    b.classList.add('is-pressed');
+  });
+  document.addEventListener('mouseup', (e)=>{
+    const b = e.target.closest('.btn.is-pressed');
+    if (b) b.classList.remove('is-pressed');
+  });
+  document.addEventListener('mouseleave', (e)=>{
+    const b = document.querySelector('.btn.is-pressed');
+    if (b) b.classList.remove('is-pressed');
+  });
+  document.addEventListener('keydown', (e)=>{
+    if (e.key !== ' ' && e.key !== 'Enter') return;
+    const b = e.target.closest && e.target.closest('.btn');
+    if (!b) return;
+    b.classList.add('is-pressed');
+  });
+  document.addEventListener('keyup', (e)=>{
+    const b = e.target.closest && e.target.closest('.btn.is-pressed');
+    if (b) b.classList.remove('is-pressed');
   });
 }
 
