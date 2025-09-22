@@ -1,17 +1,63 @@
-// Lightweight HTML partial includes for header/footer
+const PARTIAL_CACHE_PREFIX = 'partial:';
+
+function getPartialFromCache(key){
+  try{
+    return sessionStorage.getItem(PARTIAL_CACHE_PREFIX + key) || '';
+  }catch(err){
+    return '';
+  }
+}
+
+function setPartialCache(key, value){
+  try{
+    sessionStorage.setItem(PARTIAL_CACHE_PREFIX + key, value);
+  }catch(err){
+    // storage may be full or unavailable; ignore
+  }
+}
+
+function injectPartial(el, html){
+  if (!el || !html) return;
+  const tpl = document.createElement('template');
+  tpl.innerHTML = html.trim();
+  el.innerHTML = '';
+  el.appendChild(tpl.content.cloneNode(true));
+  el.removeAttribute('data-loading');
+  el.setAttribute('data-cache-applied', 'true');
+}
+
+// Lightweight HTML partial includes for header/footer, with caching + shimmer placeholders
 async function includePartials(){
   const nodes = Array.from(document.querySelectorAll('[data-include]'));
   if (!nodes.length) return;
+
   await Promise.all(nodes.map(async el => {
     const url = el.getAttribute('data-include');
+    if (!url) return;
+
+    el.setAttribute('data-loading', 'true');
+
+    const cached = getPartialFromCache(url);
+    if (cached && !el.children.length){
+      injectPartial(el, cached);
+      el.setAttribute('data-render-source', 'cache');
+    }
+
     try {
       const res = await fetch(url, {cache:'no-cache'});
-      if (!res.ok) throw new Error('Failed to load ' + url);
+      if (!res.ok) throw new Error('Failed to load ' + url + ' (' + res.status + ')');
       const html = await res.text();
-      // Replace placeholder with fetched partial
-      el.outerHTML = html;
+      setPartialCache(url, html);
+      injectPartial(el, html);
+      el.setAttribute('data-render-source', 'network');
     } catch(err){
-      // fail silently in production
+      if (!el.children.length && cached){
+        injectPartial(el, cached);
+        el.setAttribute('data-render-source', 'cache');
+      } else {
+        el.removeAttribute('data-loading');
+        el.setAttribute('data-load-error', 'true');
+      }
       console.warn(err);
     }
   }));

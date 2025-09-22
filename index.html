@@ -18,7 +18,25 @@
   <body class="page-home" data-page="home">
     <a class="skip-link" href="#main">Skip to main content</a>
 
-    <div data-include="partials/header.html"></div>
+    <div data-include="partials/header.html" data-shell="header">
+      <script>
+        (function(container){
+          if(!container) return;
+          var script = document.currentScript;
+          try{
+            var cacheKey = 'partial:partials/header.html';
+            var cached = sessionStorage.getItem(cacheKey);
+            if(cached){
+              container.insertAdjacentHTML('beforeend', cached);
+              container.setAttribute('data-cache-applied','true');
+            }
+          }catch(err){/* ignore cache issues */}
+          if(script && script.parentNode){
+            script.parentNode.removeChild(script);
+          }
+        })(document.currentScript && document.currentScript.parentElement);
+      </script>
+    </div>
 
     <main id="main">
       <!-- Hero -->
@@ -35,13 +53,10 @@
               Author
             </p>
             <div class="cta-row">
-              <button
-                id="open-booking-3"
-                class="btn btn-primary btn-lg"
-                type="button"
+              <a href="/invited_speaking" class="btn btn-primary btn-lg"
+                >Invite Dr. Elaine to Speak</a
               >
-                Invite Dr. Elaine to Speak
-              </button>
+
               <a href="#framework" class="btn btn-ghost btn-lg"
                 >Discover the 5Q MindVehicle™ Framework</a
               >
@@ -449,7 +464,25 @@
       </section>
     </main>
 
-    <div data-include="partials/footer.html"></div>
+        <div data-include="partials/footer.html" data-shell="footer">
+      <script>
+        (function(container){
+          if(!container) return;
+          var script = document.currentScript;
+          try{
+            var cacheKey = 'partial:partials/footer.html';
+            var cached = sessionStorage.getItem(cacheKey);
+            if(cached){
+              container.insertAdjacentHTML('beforeend', cached);
+              container.setAttribute('data-cache-applied','true');
+            }
+          }catch(err){/* ignore cache issues */}
+          if(script && script.parentNode){
+            script.parentNode.removeChild(script);
+          }
+        })(document.currentScript && document.currentScript.parentElement);
+      </script>
+    </div>
 
     <script src="script.js"></script>
   </body>

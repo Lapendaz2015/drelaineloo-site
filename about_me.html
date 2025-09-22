@@ -14,7 +14,25 @@
   <body class="page-about" data-page="about">
     <a class="skip-link" href="#main">Skip to main content</a>
 
-    <div data-include="partials/header.html"></div>
+    <div data-include="partials/header.html" data-shell="header">
+      <script>
+        (function(container){
+          if(!container) return;
+          var script = document.currentScript;
+          try{
+            var cacheKey = 'partial:partials/header.html';
+            var cached = sessionStorage.getItem(cacheKey);
+            if(cached){
+              container.insertAdjacentHTML('beforeend', cached);
+              container.setAttribute('data-cache-applied','true');
+            }
+          }catch(err){/* ignore cache issues */}
+          if(script && script.parentNode){
+            script.parentNode.removeChild(script);
+          }
+        })(document.currentScript && document.currentScript.parentElement);
+      </script>
+    </div>
 
     <main id="main">
       <!-- Hero -->
@@ -503,7 +521,25 @@
       </section>
     </main>
 
-    <div data-include="partials/footer.html"></div>
+        <div data-include="partials/footer.html" data-shell="footer">
+      <script>
+        (function(container){
+          if(!container) return;
+          var script = document.currentScript;
+          try{
+            var cacheKey = 'partial:partials/footer.html';
+            var cached = sessionStorage.getItem(cacheKey);
+            if(cached){
+              container.insertAdjacentHTML('beforeend', cached);
+              container.setAttribute('data-cache-applied','true');
+            }
+          }catch(err){/* ignore cache issues */}
+          if(script && script.parentNode){
+            script.parentNode.removeChild(script);
+          }
+        })(document.currentScript && document.currentScript.parentElement);
+      </script>
+    </div>
 
     <script src="script.js"></script>
   </body>
