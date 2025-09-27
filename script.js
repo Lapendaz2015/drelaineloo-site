@@ -242,7 +242,7 @@ function createModal(){
     const notes = data.get('notes') || '';
     const subject = encodeURIComponent('Strategic Collaboration Call request');
     const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nOrganization: ${org}\nRole: ${role}\n\nNotes:\n${notes}`);
-    const href = `mailto:info@drelaineloo.com?subject=${subject}&body=${body}`;
+    const href = `mailto:elaine871207@gmail.com?subject=${subject}&body=${body}`;
     // open mail client
     window.location.href = href;
     showToast('Opening mail client...');

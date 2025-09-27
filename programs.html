@@ -16,18 +16,20 @@
 
     <div data-include="partials/header.html" data-shell="header">
       <script>
-        (function(container){
-          if(!container) return;
+        (function (container) {
+          if (!container) return;
           var script = document.currentScript;
-          try{
-            var cacheKey = 'partial:partials/header.html';
+          try {
+            var cacheKey = "partial:partials/header.html";
             var cached = sessionStorage.getItem(cacheKey);
-            if(cached){
-              container.insertAdjacentHTML('beforeend', cached);
-              container.setAttribute('data-cache-applied','true');
+            if (cached) {
+              container.insertAdjacentHTML("beforeend", cached);
+              container.setAttribute("data-cache-applied", "true");
             }
-          }catch(err){/* ignore cache issues */}
-          if(script && script.parentNode){
+          } catch (err) {
+            /* ignore cache issues */
+          }
+          if (script && script.parentNode) {
             script.parentNode.removeChild(script);
           }
         })(document.currentScript && document.currentScript.parentElement);
@@ -39,7 +41,9 @@
       <section class="hero programs-hero">
         <div class="container hero-grid programs-hero-grid">
           <div class="programs-hero-copy">
-            <h1 class="display">Practical &amp; Programs</h1>
+            <h1 class="display" style="color: #fff">
+              Practical &amp; Programs
+            </h1>
             <p class="subtitle">Where the 5Q MindVehicle™ comes alive</p>
             <p>
               The 5Q MindVehicle™ Framework exists because the future demands
@@ -53,7 +57,7 @@
                 class="btn btn-primary btn-lg"
                 type="button"
               >
-                Talk to us about programs
+                Talk to us about programs – Let’ Connec
               </button>
             </div>
           </div>
@@ -93,6 +97,36 @@
             </div>
             <div class="program-block">
               <h3 class="meta-title">Milestone</h3>
+              <ul class="meta-list">
+                <li>
+                  9 seasons of Teen Talk with 30+ Public Advocates — empowering
+                  youth to speak to thousands.
+                </li>
+                <li>Student represented TEDx Youth Malaysia.</li>
+                <li>
+                  30 graduates of our 5–8 year program, many now pursuing their
+                  life mission worldwide.
+                </li>
+                <li>
+                  2,000+ students impacted through leadership, stage &amp;
+                  confidence-building training.
+                </li>
+                <li>
+                  50+ TOCP Leadership Camps organized, nurturing future-ready
+                  leaders.
+                </li>
+                <li>
+                  10,000+ impactful coaching hours delivered by passionate
+                  coaches.
+                </li>
+                <li>
+                  100+ hours of student involvement in community service,
+                  charity work, workshops and upskill learning.
+                </li>
+                <li>
+                  Received Asia Excellence in Quality Education Award (2024).
+                </li>
+              </ul>
             </div>
             <div class="program-block">
               <h3 class="meta-title">Outcomes</h3>
@@ -147,7 +181,81 @@
             </div>
             <div class="program-block">
               <h3 class="meta-title">Milestone</h3>
-              <p>Xxxxx waiting director group</p>
+              <ul class="meta-list">
+                <li>
+                  <strong>2017 – Official Launch:</strong>
+                  <span class="meta-sub"
+                    >Established DeEmcee as a structured confidence speaking
+                    programme with a standardised multi‑level grading
+                    system</span
+                  >
+                  <span class="meta-sub"
+                    >Opened the first branch in Malaysia.</span
+                  >
+                </li>
+                <li>
+                  <strong>2020 – Reached 10 branches nationwide:</strong>
+                  <span class="meta-sub">
+                    Opened the first branch in East Malaysia (Sarawak).</span
+                  >
+                </li>
+                <li>
+                  <strong>2022 – Franchisor Registration:</strong>
+                  <span class="meta-sub">
+                    Officially registered as a franchisor under Malaysian
+                    franchise law.</span
+                  >
+                </li>
+                <li>
+                  <strong>2023 – Programme Milestones & Recognition:</strong>
+                  <span class="meta-sub"
+                    >Marked the first 100 graduates completing the full 6‑grade
+                    level programme.</span
+                  >
+                  <span class="meta-sub"
+                    >Named a Top 3 Finalist for Emerging Franchisor of the Year
+                    by the Malaysia Franchise Association.</span
+                  >
+                </li>
+                <li>
+                  <strong>2024 – Expansion & Awards:</strong>
+                  <span class="meta-sub"
+                    >Achieved the 30‑branch milestone across Malaysia and
+                    abroad.</span
+                  >
+                  <span class="meta-sub"
+                    >Awarded the Most Trusted Excellence Award in
+                    Indonesia.</span
+                  >
+                  <span class="meta-sub"
+                    >Named a Top 3 Finalist for Emerging Franchisor of the Year
+                    by the Malaysia Franchise Association.</span
+                  >
+                  <span class="meta-sub"
+                    >Surpassed 150 certified confident and lively
+                    educators.</span
+                  >
+                </li>
+                <li>
+                  <strong>2025 – Regional Growth & Impact:</strong>
+                  <span class="meta-sub"
+                    >Opened the first overseas branch in Brisbane,
+                    Australia.</span
+                  >
+                  <span class="meta-sub"
+                    >Opening the first branch in Singapore, Philippines, and
+                    Thailand.</span
+                  >
+                  <span class="meta-sub"
+                    >Embarking on a 30‑school tour to impact 10,000 students
+                    nationwide.</span
+                  >
+                  <span class="meta-sub"
+                    >Organized a total of 100+ Challenge Day sessions in malls
+                    for real public speaking exposure.</span
+                  >
+                </li>
+              </ul>
             </div>
             <div class="program-block">
               <h3 class="meta-title">Outcome</h3>
@@ -164,91 +272,6 @@
               </button>
             </div>
           </article>
-        </div>
-      </section>
-
-      <!-- Parents First – Parental Education & Leadership -->
-      <section
-        class="container intro program-section"
-        aria-labelledby="parents-first"
-      >
-        <div class="section-head">
-          <h2 id="parents-first" class="section-title">
-            Parents First — Parental Education &amp; Leadership
-          </h2>
-        </div>
-        <div class="program-layout">
-          <article class="about-card program-card">
-            <div class="program-block">
-              <h3 class="meta-title">Story</h3>
-              <p>
-                Parenting is the first and most important form of leadership.
-                Parents First equips mothers, fathers, and even corporate
-                leaders with cognitive science‑informed, practical tools to
-                strengthen their own 5Q MindVehicle — advancing humankind.
-              </p>
-            </div>
-            <div class="program-block">
-              <h3 class="meta-title">Achievements &amp; Milestones</h3>
-              <ul class="meta-list">
-                <li>
-                  <strong>2021 – Early Vision:</strong> Scientific and artistic
-                  parenting education; launched 4Q framework.
-                </li>
-                <li>
-                  <strong>2022 – Expansion:</strong> Introduced 5Q Course
-                  (adding UQ); listed in Britishpedia Successful People in
-                  Malaysia.
-                </li>
-                <li>
-                  <strong
-                    >2023 – Professional Certification &amp; Awards:</strong
-                  >
-                  First Professional Certification in Parental Education
-                  (University Malaya‑accredited); ASEAN Professional Award;
-                  BabyTalk MamaPapa Award.
-                </li>
-                <li>
-                  <strong
-                    >2024 – International Accreditation &amp; Corporate
-                    Training:</strong
-                  >
-                  5Q Accreditation by CCE Finland; HRD Corp‑approved training
-                  provider; Launched 6Q Quantum Communication &amp; Social
-                  Science Course.
-                </li>
-                <li>
-                  <strong>2025 – Global Excellence:</strong> CCE Finland Best
-                  Curriculum Design Innovation Award; CCE Finland Best Skill
-                  Development Centre Award; 6Q Professional Diploma accredited
-                  by CMA (UK).
-                </li>
-              </ul>
-            </div>
-            <div class="program-block">
-              <h3 class="meta-title">Outcomes</h3>
-              <p>
-                Adults feel empowered, children thrive, and families replace
-                pressure with resilience and joy.
-              </p>
-            </div>
-            <div class="program-cta">
-              <button id="open-booking-2" class="btn btn-ghost" type="button">
-                Empower parents with Parents First certification
-              </button>
-            </div>
-          </article>
-          <div class="program-gallery">
-            <figure class="media-wide media-tight">
-              <img
-                src="assets/images/elainelooo.jpg"
-                alt="Parents First program — workshop snapshot"
-              />
-              <figcaption class="cap">
-                Parents First — learning that transforms families.
-              </figcaption>
-            </figure>
-          </div>
         </div>
       </section>
 
@@ -308,6 +331,112 @@
         </div>
       </section>
 
+      <!-- Parents First – Parental Education & Leadership -->
+      <section
+        class="container intro program-section"
+        aria-labelledby="parents-first"
+      >
+        <div class="section-head">
+          <h2 id="parents-first" class="section-title">
+            Parents First — Parental Education &amp; Leadership
+          </h2>
+        </div>
+        <div class="program-layout">
+          <article class="about-card program-card">
+            <div class="program-block">
+              <h3 class="meta-title">Story</h3>
+              <p>
+                Parenting is the first and most important form of leadership.
+                Parents First equips mothers, fathers, and even corporate
+                leaders with cognitive science‑informed, practical tools to
+                strengthen their own 5Q MindVehicle — advancing humankind.
+              </p>
+            </div>
+            <div class="program-block">
+              <h3 class="meta-title">Achievements &amp; Milestones</h3>
+              <ul class="meta-list">
+                <li>
+                  <strong>2021 – Early Vision:</strong>
+                  <span class="meta-sub">
+                    Scientific and artistic parenting education</span
+                  >
+                  <span class="meta-sub">launched 4Q framework</span>
+                </li>
+                <li>
+                  <strong>2022 – Expansion:</strong>
+                  <span class="meta-sub">
+                    Introduced 5Q Course (adding UQ)</span
+                  >
+                  <span class="meta-sub"
+                    >Listed in Britishpedia Successful People in Malaysia.</span
+                  >
+                </li>
+                <li>
+                  <strong
+                    >2023 – Professional Certification &amp; Awards:</strong
+                  >
+                  <span class="meta-sub"
+                    >First Professional Certification in Parental Education
+                    (University Malaya‑accredited).</span
+                  >
+                  <span class="meta-sub">ASEAN Professional Award.</span>
+                  <span class="meta-sub">BabyTalk MamaPapa Award.</span>
+                </li>
+                <li>
+                  <strong
+                    >2024 – International Accreditation &amp; Corporate
+                    Training:</strong
+                  >
+                  <span class="meta-sub">5Q Accreditation by CCE Finland.</span>
+                  <span class="meta-sub"
+                    >HRD Corp‑approved training provider.</span
+                  >
+                  <span class="meta-sub"
+                    >Launched 6Q Quantum Communication &amp; Social Science
+                    Course.</span
+                  >
+                </li>
+                <li>
+                  <strong>2025 – Global Excellence:</strong>
+                  <span class="meta-sub"
+                    >CCE Finland Best Curriculum Design Innovation Award.</span
+                  >
+                  <span class="meta-sub"
+                    >CCE Finland Best Skill Development Centre Award.</span
+                  >
+                  <span class="meta-sub"
+                    >6Q Professional Diploma accredited by CMA (UK).</span
+                  >
+                </li>
+              </ul>
+            </div>
+            <div class="program-block">
+              <h3 class="meta-title">Outcomes</h3>
+              <p>
+                Adults feel empowered, children thrive, and families replace
+                pressure with resilience and joy.
+              </p>
+            </div>
+            <div class="program-cta">
+              <button id="open-booking-2" class="btn btn-ghost" type="button">
+                Empower parents with Parents First certification
+              </button>
+            </div>
+          </article>
+          <div class="program-gallery">
+            <figure class="media-wide media-tight">
+              <img
+                src="assets/images/elainelooo.jpg"
+                alt="Parents First program — workshop snapshot"
+              />
+              <figcaption class="cap">
+                Parents First — learning that transforms families.
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
       <!-- Why It Matters -->
 
       <section
@@ -327,20 +456,22 @@
       </section>
     </main>
 
-        <div data-include="partials/footer.html" data-shell="footer">
+    <div data-include="partials/footer.html" data-shell="footer">
       <script>
-        (function(container){
-          if(!container) return;
+        (function (container) {
+          if (!container) return;
           var script = document.currentScript;
-          try{
-            var cacheKey = 'partial:partials/footer.html';
+          try {
+            var cacheKey = "partial:partials/footer.html";
             var cached = sessionStorage.getItem(cacheKey);
-            if(cached){
-              container.insertAdjacentHTML('beforeend', cached);
-              container.setAttribute('data-cache-applied','true');
+            if (cached) {
+              container.insertAdjacentHTML("beforeend", cached);
+              container.setAttribute("data-cache-applied", "true");
             }
-          }catch(err){/* ignore cache issues */}
-          if(script && script.parentNode){
+          } catch (err) {
+            /* ignore cache issues */
+          }
+          if (script && script.parentNode) {
             script.parentNode.removeChild(script);
           }
         })(document.currentScript && document.currentScript.parentElement);

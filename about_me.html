@@ -16,18 +16,20 @@
 
     <div data-include="partials/header.html" data-shell="header">
       <script>
-        (function(container){
-          if(!container) return;
+        (function (container) {
+          if (!container) return;
           var script = document.currentScript;
-          try{
-            var cacheKey = 'partial:partials/header.html';
+          try {
+            var cacheKey = "partial:partials/header.html";
             var cached = sessionStorage.getItem(cacheKey);
-            if(cached){
-              container.insertAdjacentHTML('beforeend', cached);
-              container.setAttribute('data-cache-applied','true');
+            if (cached) {
+              container.insertAdjacentHTML("beforeend", cached);
+              container.setAttribute("data-cache-applied", "true");
             }
-          }catch(err){/* ignore cache issues */}
-          if(script && script.parentNode){
+          } catch (err) {
+            /* ignore cache issues */
+          }
+          if (script && script.parentNode) {
             script.parentNode.removeChild(script);
           }
         })(document.currentScript && document.currentScript.parentElement);
@@ -47,8 +49,9 @@
               Growing up in Malaysia meant navigating cultural differences,
               neurodivergence, and the many “streams” of education. These
               experiences shaped Dr. Elaine Loo’s conviction: education must go
-              beyond grades. In a world where AI can outthink humans in IQ, what
-              matters most is nurturing the fullness of human potential.
+              beyond grades and excel collectively. Out-think in a world where
+              AI can outthink humans in IQ, what matters most is nurturing the
+              fullness of human potential.
             </p>
           </div>
           <figure class="hero-figure">
@@ -57,7 +60,7 @@
               alt="Candid portrait of Dr. Elaine in a school setting"
             />
             <figcaption class="subtitle" style="margin-top: 0.5rem">
-              “Rooted in diversity. Guided by compassion.”
+              “Turning inner potential into global impact”
             </figcaption>
           </figure>
         </div>
@@ -118,9 +121,9 @@
         <p>
           The answer lies in <strong>EQ</strong> (emotional regulation),
           <strong>AQ</strong> (adaptability), <strong>SQ</strong> (social
-          meaning‑making), and <strong>UQ</strong> (You — identity awareness).
-          Her <strong>5Q MindVehicle™ Framework</strong> unites these with IQ,
-          not as competition, but as collaboration. When people live with 5Q,
+          meaning‑making), and <strong>UQ</strong> (identity awareness). Her
+          <strong>5Q MindVehicle™ Framework</strong> unites these with IQ, not
+          as competition, but as collaboration. When people live with 5Q,
           families connect more deeply, educators inspire with meaning, and
           communities rise together.
         </p>
@@ -145,9 +148,6 @@
           <div class="academic-duo">
             <article class="academic-card">
               <header class="academic-card-head">
-                <span class="academic-chip" aria-hidden="true"
-                  >Core Degrees</span
-                >
                 <h3>Degrees</h3>
               </header>
               <ul class="academic-list">
@@ -157,27 +157,18 @@
                   First‑Class Honours in Accounting & Finance (Anglia Ruskin
                   University, UK)
                 </li>
-                <li>
-                  Currently pursuing 2nd PhD — Cognitive Science (University of
-                  Jyväskylä, Finland)
-                </li>
+                <li>Currently pursuing Computing and Education</li>
               </ul>
             </article>
             <article class="academic-card">
               <header class="academic-card-head">
-                <span class="academic-chip" aria-hidden="true"
-                  >Global Endorsement</span
-                >
-                <h3>International Endorsement</h3>
+                <h3>Professional Certification</h3>
               </header>
-              <p>
-                “AI‑Supported Digital Platforms in Parental Education and Mental
-                Healthcare” endorsed by Prof.
-                <strong>Pekka Neittaanmäki</strong>, UNESCO Chair (Finland).
-                This recognition affirms Dr. Elaine’s role in bridging Malaysia
-                and Europe — turning research into inclusive, human‑centered
-                innovation for families worldwide.
-              </p>
+              <ul class="academic-list">
+                <li>Adult Counselling</li>
+                <li>Family Therapy</li>
+                <li>Couple Development</li>
+              </ul>
             </article>
           </div>
           <figure class="">
@@ -202,7 +193,7 @@
             <p>
               Founded to uplift enrichment education globally. Through the
               Eduverse Project, IGA is preparing 10,000 educators, coaches, and
-              instructors — building a movement where science and compassion
+              instructors, building a movement where science and compassion
               meet.
             </p>
           </article>
@@ -210,7 +201,7 @@
             <h3>Malaysia Psychotherapy Association (MAP)</h3>
             <p>
               Certified board member and licensed psychotherapist. Advocates
-              “prevention is better than cure” — strengthening families with
+              “prevention is better than cure”, strengthening families with
               early support to protect mental health before crises arise.
             </p>
           </article>
@@ -218,15 +209,15 @@
             <h3>Complementary Medical Association (UK)</h3>
             <p>
               Fellow recognized for integrating alternative and preventive
-              approaches to mental wellness into education and corporate spaces
-              — making health and learning inseparable.
+              approaches to mental wellness into education and corporate spaces,
+              making health and learning inseparable.
             </p>
           </article>
           <article class="about-card">
             <h3>International Strategic Institute (ISI)</h3>
             <p>
               Honoured for bridging educational policy, cognitive development,
-              and emotional well‑being. A commitment to shaping systems that
+              and emotional well being. A commitment to shaping systems that
               nurture both individuals and societies.
             </p>
           </article>
@@ -295,7 +286,7 @@
           </h2>
           <p class="section-lead">
             Each recognition reflects not only an achievement, but a story of
-            purpose — how turning inner potential can uplift communities,
+            purpose, how turning inner potential can uplift communities,
             nations, and the next generation.
           </p>
         </div>
@@ -521,20 +512,22 @@
       </section>
     </main>
 
-        <div data-include="partials/footer.html" data-shell="footer">
+    <div data-include="partials/footer.html" data-shell="footer">
       <script>
-        (function(container){
-          if(!container) return;
+        (function (container) {
+          if (!container) return;
           var script = document.currentScript;
-          try{
-            var cacheKey = 'partial:partials/footer.html';
+          try {
+            var cacheKey = "partial:partials/footer.html";
             var cached = sessionStorage.getItem(cacheKey);
-            if(cached){
-              container.insertAdjacentHTML('beforeend', cached);
-              container.setAttribute('data-cache-applied','true');
+            if (cached) {
+              container.insertAdjacentHTML("beforeend", cached);
+              container.setAttribute("data-cache-applied", "true");
             }
-          }catch(err){/* ignore cache issues */}
-          if(script && script.parentNode){
+          } catch (err) {
+            /* ignore cache issues */
+          }
+          if (script && script.parentNode) {
             script.parentNode.removeChild(script);
           }
         })(document.currentScript && document.currentScript.parentElement);

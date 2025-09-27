@@ -20,18 +20,20 @@
 
     <div data-include="partials/header.html" data-shell="header">
       <script>
-        (function(container){
-          if(!container) return;
+        (function (container) {
+          if (!container) return;
           var script = document.currentScript;
-          try{
-            var cacheKey = 'partial:partials/header.html';
+          try {
+            var cacheKey = "partial:partials/header.html";
             var cached = sessionStorage.getItem(cacheKey);
-            if(cached){
-              container.insertAdjacentHTML('beforeend', cached);
-              container.setAttribute('data-cache-applied','true');
+            if (cached) {
+              container.insertAdjacentHTML("beforeend", cached);
+              container.setAttribute("data-cache-applied", "true");
             }
-          }catch(err){/* ignore cache issues */}
-          if(script && script.parentNode){
+          } catch (err) {
+            /* ignore cache issues */
+          }
+          if (script && script.parentNode) {
             script.parentNode.removeChild(script);
           }
         })(document.currentScript && document.currentScript.parentElement);
@@ -49,7 +51,7 @@
               Impact
             </h1>
             <p class="subtitle">
-              Education & Cognitive Science Researcher | International Speaker |
+              Education Researcher | Psychotherapist | International Speaker |
               Author
             </p>
             <div class="cta-row">
@@ -92,10 +94,10 @@
             <p>
               Her pioneering <strong>5Q MindVehicle™ Framework</strong> has
               inspired families, uplifted schools, and guided organizations
-              across Asia and beyond. From keynote stages in India, Finland, and
-              Austria to parenting programs on the ground, her mission is
-              simple: the more people who live with 5Q, the stronger our
-              communities and the brighter our future.
+              across Asia and beyond. From conference speaker stages in India,
+              Finland, and Austria to parenting programs on the ground, her
+              mission is simple: the more people who live with 5Q, the stronger
+              our communities and the brighter our future.
             </p>
           </div>
         </div>
@@ -132,12 +134,12 @@
           </article>
           <article class="stat">
             <img src="assets/ic-book.svg" alt="" aria-hidden="true" />
-            <h3>40,000+</h3>
+            <h3>100,000+</h3>
             <p>books sold (Prison Child, Prison Parent)</p>
           </article>
           <article class="stat">
             <img src="assets/ic-globe.svg" alt="" aria-hidden="true" />
-            <h3>Global keynote speaker</h3>
+            <h3>international speaker</h3>
             <p>India • Finland • Austria</p>
           </article>
           <article class="stat">
@@ -464,20 +466,22 @@
       </section>
     </main>
 
-        <div data-include="partials/footer.html" data-shell="footer">
+    <div data-include="partials/footer.html" data-shell="footer">
       <script>
-        (function(container){
-          if(!container) return;
+        (function (container) {
+          if (!container) return;
           var script = document.currentScript;
-          try{
-            var cacheKey = 'partial:partials/footer.html';
+          try {
+            var cacheKey = "partial:partials/footer.html";
             var cached = sessionStorage.getItem(cacheKey);
-            if(cached){
-              container.insertAdjacentHTML('beforeend', cached);
-              container.setAttribute('data-cache-applied','true');
+            if (cached) {
+              container.insertAdjacentHTML("beforeend", cached);
+              container.setAttribute("data-cache-applied", "true");
             }
-          }catch(err){/* ignore cache issues */}
-          if(script && script.parentNode){
+          } catch (err) {
+            /* ignore cache issues */
+          }
+          if (script && script.parentNode) {
             script.parentNode.removeChild(script);
           }
         })(document.currentScript && document.currentScript.parentElement);

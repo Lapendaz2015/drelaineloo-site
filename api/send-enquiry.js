@@ -53,7 +53,7 @@ module.exports = async (req, res) => {
     await transporter.sendMail({
       from: `Dr Elaine Loo Website <${from}>`,
       replyTo: email,
-      to: 'info@drelaineloo.com',
+      to: 'elaine871207@gmail.com',
       subject,
       text: bodyLines.join('\n')
     });

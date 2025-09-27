@@ -16,18 +16,20 @@
 
     <div data-include="partials/header.html" data-shell="header">
       <script>
-        (function(container){
-          if(!container) return;
+        (function (container) {
+          if (!container) return;
           var script = document.currentScript;
-          try{
-            var cacheKey = 'partial:partials/header.html';
+          try {
+            var cacheKey = "partial:partials/header.html";
             var cached = sessionStorage.getItem(cacheKey);
-            if(cached){
-              container.insertAdjacentHTML('beforeend', cached);
-              container.setAttribute('data-cache-applied','true');
+            if (cached) {
+              container.insertAdjacentHTML("beforeend", cached);
+              container.setAttribute("data-cache-applied", "true");
             }
-          }catch(err){/* ignore cache issues */}
-          if(script && script.parentNode){
+          } catch (err) {
+            /* ignore cache issues */
+          }
+          if (script && script.parentNode) {
             script.parentNode.removeChild(script);
           }
         })(document.currentScript && document.currentScript.parentElement);
@@ -209,14 +211,6 @@
             </ul>
           </article>
         </div>
-
-        <div class="sdg-row" aria-label="SDG focus areas">
-          <span class="pill sdg sdg-3">SDG 3</span>
-          <span class="pill sdg sdg-4">SDG 4</span>
-          <span class="pill sdg sdg-5">SDG 5</span>
-          <span class="pill sdg sdg-8">SDG 8</span>
-          <span class="pill sdg sdg-17">SDG 17</span>
-        </div>
       </section>
 
       <!-- Full width image (Global Keynote Speaker) -->
@@ -227,11 +221,18 @@
             alt="Global keynote speaker on stage"
             loading="lazy"
           />
+          <figcaption class="cap">
+            The Sustainable Development Goals (SDG) icons are used here under UN
+            guidelines for advocacy and awareness.
+          </figcaption>
         </figure>
       </section>
 
       <!-- CTA -->
-      <section class="cta-banner speaking-cta" aria-labelledby="speaking-cta-title">
+      <section
+        class="cta-banner speaking-cta"
+        aria-labelledby="speaking-cta-title"
+      >
         <div class="container cta-inner">
           <div class="speaking-cta-copy">
             <h2 id="speaking-cta-title">Invite Dr. Elaine to Your Stage</h2>
@@ -256,20 +257,22 @@
       </section>
     </main>
 
-        <div data-include="partials/footer.html" data-shell="footer">
+    <div data-include="partials/footer.html" data-shell="footer">
       <script>
-        (function(container){
-          if(!container) return;
+        (function (container) {
+          if (!container) return;
           var script = document.currentScript;
-          try{
-            var cacheKey = 'partial:partials/footer.html';
+          try {
+            var cacheKey = "partial:partials/footer.html";
             var cached = sessionStorage.getItem(cacheKey);
-            if(cached){
-              container.insertAdjacentHTML('beforeend', cached);
-              container.setAttribute('data-cache-applied','true');
+            if (cached) {
+              container.insertAdjacentHTML("beforeend", cached);
+              container.setAttribute("data-cache-applied", "true");
             }
-          }catch(err){/* ignore cache issues */}
-          if(script && script.parentNode){
+          } catch (err) {
+            /* ignore cache issues */
+          }
+          if (script && script.parentNode) {
             script.parentNode.removeChild(script);
           }
         })(document.currentScript && document.currentScript.parentElement);

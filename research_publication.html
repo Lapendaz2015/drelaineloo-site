@@ -16,18 +16,20 @@
 
     <div data-include="partials/header.html" data-shell="header">
       <script>
-        (function(container){
-          if(!container) return;
+        (function (container) {
+          if (!container) return;
           var script = document.currentScript;
-          try{
-            var cacheKey = 'partial:partials/header.html';
+          try {
+            var cacheKey = "partial:partials/header.html";
             var cached = sessionStorage.getItem(cacheKey);
-            if(cached){
-              container.insertAdjacentHTML('beforeend', cached);
-              container.setAttribute('data-cache-applied','true');
+            if (cached) {
+              container.insertAdjacentHTML("beforeend", cached);
+              container.setAttribute("data-cache-applied", "true");
             }
-          }catch(err){/* ignore cache issues */}
-          if(script && script.parentNode){
+          } catch (err) {
+            /* ignore cache issues */
+          }
+          if (script && script.parentNode) {
             script.parentNode.removeChild(script);
           }
         })(document.currentScript && document.currentScript.parentElement);
@@ -66,6 +68,15 @@
               >
                 Collaborate on Research
               </button>
+              <!-- TODO: Replace href with the actual Journal Article URL -->
+              <a
+                class="btn btn-ghost btn-lg"
+                href="#"
+                target="_blank"
+                rel="noopener"
+              >
+                Journal Article
+              </a>
             </div>
           </div>
           <figure class="hero-figure">
@@ -83,7 +94,7 @@
         <div class="about-grid">
           <article class="about-card endorsement-card">
             <div class="endorsement-header">
-              <span class="badge">UNESCO Chair Endorsement</span>
+              <span class="badge">Collaborative Research Project</span>
               <h3>Prof. Pekka Neittaanmäki</h3>
               <p class="endorsement-role">
                 UNESCO Chair on AI-Supported Digital Platforms in Education
@@ -93,16 +104,6 @@
             </div>
 
             <div class="endorsement-body">
-              <p class="endorsement-lead">
-                “<strong>Pekka Neittaanmäki</strong> aligns and endorses our
-                initiative
-                <em
-                  >AI-Supported Digital Platforms in Parental Education and
-                  Mental Healthcare</em
-                >, highlighting its capacity to advance inclusive,
-                human-centered innovation.”
-              </p>
-
               <div class="endorsement-highlight">
                 <span class="tag">Key impacts he champions</span>
                 <ul class="endorsement-list">
@@ -130,18 +131,18 @@
                 implementation that feeds valuable knowledge back into the
                 global dialogue on parental wellbeing and digital innovation.
               </p>
+
+              <p class="endorsement-lead">
+                “<strong>Dr. Elaine Loo</strong> is a researcher collaborating
+                with international partner including UNESCO Chairs in a project
+                of “AI-Supported Digital Platforms in Parental Education and
+                Mental Healthcare, turning research into inclusive,
+                human-centered innovation for individuals, highlighting its
+                capacity to advance inclusive, human-centered innovation.”
+              </p>
             </div>
           </article>
           <div class="media-stack">
-            <figure class="media-wide" style="margin: 0">
-              <img
-                src="assets/images/Flag_of_UNESCO.png"
-                alt="UNESCO project, collaboration between Malaysia and Finland"
-              />
-              <figcaption class="cap">
-                Human-centered research for families and communities.
-              </figcaption>
-            </figure>
             <figure class="media-wide" style="margin: 0">
               <img
                 src="assets/images/unnamed.png"
@@ -265,9 +266,7 @@
             </video>
           </div>
 
-          <figcaption class="cap">
-            “Scholarship that serves society.”
-          </figcaption>
+          <figcaption class="cap">“Media Outreach in Amplification”</figcaption>
         </figure>
 
         <div class="cta-row" style="margin-top: 0.5rem">
@@ -282,7 +281,10 @@
       </section>
 
       <!-- CTA -->
-      <section class="cta-banner research-cta" aria-labelledby="research-cta-title">
+      <section
+        class="cta-banner research-cta"
+        aria-labelledby="research-cta-title"
+      >
         <div class="container cta-inner">
           <div class="research-cta-copy">
             <h2 id="research-cta-title">Collaborate on Research</h2>
@@ -306,20 +308,22 @@
       </section>
     </main>
 
-        <div data-include="partials/footer.html" data-shell="footer">
+    <div data-include="partials/footer.html" data-shell="footer">
       <script>
-        (function(container){
-          if(!container) return;
+        (function (container) {
+          if (!container) return;
           var script = document.currentScript;
-          try{
-            var cacheKey = 'partial:partials/footer.html';
+          try {
+            var cacheKey = "partial:partials/footer.html";
             var cached = sessionStorage.getItem(cacheKey);
-            if(cached){
-              container.insertAdjacentHTML('beforeend', cached);
-              container.setAttribute('data-cache-applied','true');
+            if (cached) {
+              container.insertAdjacentHTML("beforeend", cached);
+              container.setAttribute("data-cache-applied", "true");
             }
-          }catch(err){/* ignore cache issues */}
-          if(script && script.parentNode){
+          } catch (err) {
+            /* ignore cache issues */
+          }
+          if (script && script.parentNode) {
             script.parentNode.removeChild(script);
           }
         })(document.currentScript && document.currentScript.parentElement);
