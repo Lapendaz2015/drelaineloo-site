@@ -269,6 +269,7 @@ a:hover{text-decoration:underline}
   border-radius:1.8rem;
   border:1px solid rgba(229,199,203,.35);
   opacity:.6;
+  pointer-events:none;
 }
 .page-programs .hero .btn-ghost{background:rgba(255,255,255,.12); border-color:rgba(255,255,255,.24); color:#f6f8ff}
 .page-programs .hero .btn-ghost:hover{background:rgba(255,255,255,.2); border-color:rgba(255,255,255,.3)}

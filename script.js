@@ -508,6 +508,7 @@ let lightboxIndex = -1;
 
 function initImageLightbox(){
   const selectors = [
+    '.hero-figure img',
     '.media-wide img',
     '.pub-figure img',
     '.book-figure img',
@@ -526,6 +527,11 @@ function initImageLightbox(){
     if (img.dataset.lightboxBound) return;
     if (link && !isRecognitionLink) return;
     img.dataset.lightboxBound = 'true';
+    // Derive caption from sibling figcaption if available and not already set
+    if (!img.dataset.caption){
+      const fc = img.closest('figure') && img.closest('figure').querySelector('figcaption');
+      if (fc && fc.textContent) img.dataset.caption = fc.textContent.trim();
+    }
     img.classList.add('is-lightbox-enabled');
 
     const handleOpen = (e) => {
