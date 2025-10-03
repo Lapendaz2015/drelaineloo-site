@@ -664,7 +664,7 @@ function setLightboxImage(img){
   lightboxImg.src = src;
   lightboxImg.alt = img.alt || '';
   const caption = img.dataset.caption || img.alt || '';
-  lightboxCaption.textContent = caption;
+  // lightboxCaption.textContent = caption;
 }
 
 function shiftLightbox(delta){
