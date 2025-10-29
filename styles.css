@@ -11,11 +11,11 @@
   --brand-2:#cfc9cb;
   --brand-soft:#f6f5f5;
   --brand-cta:#8a8081;
-  --accent:#af7378;
-  --accent-rgb:175,115,120;
-  --accent-600:#a4686e;
-  --accent-700:#8f5c60;
-  --accent-100:#f6e9eb;
+  --accent:#d6b85a; /* warm yellow/gold */
+  --accent-rgb:214,184,90;
+  --accent-600:#b58f3e;
+  --accent-700:#8f6f2e;
+  --accent-100:#fff2d0; /* light background yellow supplied by designer */
   --sage:#a8c0b0;
   --sage-rgb:168,192,176;
   --gold:#eadbb8;
@@ -514,8 +514,8 @@ button.gcard:focus-visible{outline:3px solid rgba(var(--accent-rgb),.45); outlin
 .program-section{padding-top:clamp(2.4rem, 6vw, 4rem)}
 .program-section .section-head{display:grid; gap:.6rem; margin-bottom:clamp(1.2rem, 4vw, 2rem)}
 .program-section .section-lead{margin:0; font-size:1.02rem; color:#1a2742; max-width:60ch}
-.program-layout{display:grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap:clamp(1.4rem, 5vw, 2.4rem); align-items:start}
-.program-layout--flip{grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr)}
+.program-layout{display:grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap:clamp(1.4rem, 5vw, 2.4rem); align-items:center}
+.program-layout--flip{grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr); align-items:center}
 .media-tight{margin:0}
 .program-card{display:grid; gap:1.2rem}
 .program-card > p{color:var(--muted); line-height:1.7}
