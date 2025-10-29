@@ -50,8 +50,16 @@ html{scroll-behavior:smooth}
 }
 .subtitle{font-weight:600; color:var(--muted); margin:.25rem 0 1rem}
 
-.grad{background:linear-gradient(135deg, var(--brand) 0%, var(--brand-2) 55%, var(--brand-soft) 100%);
-  -webkit-background-clip:text; background-clip:text; color:transparent}
+.grad{
+  /* stronger, gold-accent gradient for headline emphasis */
+  background:linear-gradient(135deg, var(--accent-700) 0%, var(--accent) 50%, var(--brand-cta) 100%);
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+  font-weight:800;
+  /* slightly larger relative size so the emphasized phrase stands out */
+  font-size:1.04em;
+  /* subtle shadow to lift from busy backgrounds */
+  text-shadow: 0 1px 0 rgba(255,255,255,0.15), 0 6px 20px rgba(0,0,0,0.08);
+}
 
 a{color:var(--brand); text-decoration:none}
 a:hover{text-decoration:underline}
