@@ -1389,6 +1389,12 @@ section[aria-label="Global Keynote Speaker"] .banner-overlay .cap{margin-top:.2r
   50%{transform:translateY(-6px); box-shadow:0 24px 48px rgba(var(--accent-rgb),.18)}
 }
 
+/* Research page: enforce consistent hero figure sizing for rp_1 / rp_2 on larger viewports */
+@media (min-width: 960px){
+  .page-research .hero-figure{max-width:720px; height:620px; overflow:hidden; border-radius:1.2rem}
+  .page-research .hero-figure img{width:100%; height:100%; object-fit:cover; display:block}
+}
+
 @media (prefers-reduced-motion: reduce){
   .page-index .hero::before,
   .page-index .hero::after,
