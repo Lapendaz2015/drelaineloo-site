@@ -254,9 +254,16 @@ function closeModal(){
   const m = document.getElementById('booking-modal'); if (m) m.remove();
 }
 
-if (openBtn) openBtn.addEventListener('click', ()=>{ createModal(); });
-if (openBtn2) openBtn2.addEventListener('click', ()=>{ createModal(); });
-if (openBtn3) openBtn3.addEventListener('click', ()=>{ createModal(); });
+function sendCollaborationMail(){
+  const href = 'mailto:elaine871207@gmail.com?subject=Collaboration';
+  // open mail client
+  window.location.href = href;
+  showToast('Opening mail client...');
+}
+
+if (openBtn) openBtn.addEventListener('click', ()=>{ sendCollaborationMail(); });
+if (openBtn2) openBtn2.addEventListener('click', ()=>{ sendCollaborationMail(); });
+if (openBtn3) openBtn3.addEventListener('click', ()=>{ sendCollaborationMail(); });
 
 // Enquiry form handler: validate and open mailto with form values
 const enq = document.getElementById('enquiry-form');
