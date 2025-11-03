@@ -283,10 +283,13 @@ a:hover{text-decoration:underline}
 .page-programs .hero .btn-ghost:hover{background:rgba(255,255,255,.2); border-color:rgba(255,255,255,.3)}
 
 @media (max-width:900px){
-  .page-programs .programs-hero-grid{grid-template-columns:1fr}
-  .programs-hero-figure{order:-1; max-width:520px; justify-self:center}
-  .page-programs .programs-hero-copy{justify-items:center; text-align:center}
-  .page-programs .hero .cta-row{justify-content:center}
+  .header-inner{align-items:center; position:relative}
+  /* brand left, toggle pinned to top-right, nav dropdown remains anchored to right */
+  .brand{order:1}
+  .nav-primary{position:relative; width:auto; margin-left:auto; order:3}
+  .nav-toggle{display:flex; order:2; margin-left:0; position:absolute; top:0.6rem; right:1rem; z-index:60}
+  /* increase hit area slightly on mobile for easier tapping */
+  .nav-toggle{min-width:44px; min-height:44px; padding:6px}
 }
 
 @keyframes connect-bg-pan{
@@ -679,8 +682,9 @@ button.gcard:focus-visible{outline:3px solid rgba(var(--accent-rgb),.45); outlin
    -------- */
 @media (max-width: 960px){
   .header-inner{align-items:center}
-  .nav-primary{position:relative; width:auto; margin-left:auto}
-  .nav-toggle{display:flex}
+  .nav-primary{position:relative; width:auto; margin-left:auto; order:3}
+  .nav-toggle{display:flex; order:2; margin-left:auto}
+  .brand{order:1}
   .nav-list{
     position:absolute;
     top:calc(100% + .75rem);
