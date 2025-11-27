@@ -530,9 +530,12 @@ function initImageLightbox(){
   images.forEach(img => {
     const link = img.closest('a');
     const isRecognitionLink = link && link.classList.contains('recognition-figure-link');
+    const isPubLink = link && link.classList.contains('pub-link');
     const galleryTrigger = img.closest('.gallery-item');
     if (img.dataset.lightboxBound) return;
-    if (link && !isRecognitionLink) return;
+    // allow lightbox for images not inside links, recognition links, and
+    // also allow images inside `.pub-link` anchors to open the lightbox
+    if (link && !isRecognitionLink && !isPubLink) return;
     img.dataset.lightboxBound = 'true';
     // Derive caption from sibling figcaption if available and not already set
     if (!img.dataset.caption){
@@ -576,7 +579,13 @@ function initImageLightbox(){
     img.setAttribute('tabindex', '0');
     img.setAttribute('role', 'button');
     img.setAttribute('aria-label', 'Expand image');
-    img.addEventListener('click', handleOpen);
+    // If the image is inside a `.pub-link` anchor we still want image clicks
+    // to open the lightbox and prevent navigation. Clicking elsewhere on the
+    // anchor will follow the link as normal.
+    img.addEventListener('click', (e) => {
+      e.preventDefault();
+      handleOpen(e);
+    });
     img.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' '){
         e.preventDefault();
