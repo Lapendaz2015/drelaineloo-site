@@ -1173,6 +1173,18 @@ section[aria-label="Global Keynote Speaker"] .banner-overlay .cap{margin-top:.2r
 .pub-card:hover .pub-figure::after,
 .pub-card:focus-within .pub-figure::after{transform:scaleX(1)}
 
+/* Download link styling inside publication cards */
+.pub-downloads{display:inline-flex; gap:.6rem; margin-top:.6rem; align-items:center}
+.pub-downloads .doc-link{display:inline-flex; align-items:center; gap:.5rem; padding:.5rem .75rem; background:linear-gradient(90deg, rgba(var(--accent-rgb),.06), rgba(var(--accent-rgb),.03)); color:var(--brand); border-radius:.6rem; box-shadow:0 8px 20px rgba(var(--accent-rgb),.06); border:1px solid rgba(var(--accent-rgb),.12); text-decoration:none; font-weight:700; font-size:.92rem; transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease}
+.pub-downloads .doc-link:hover,
+.pub-downloads .doc-link:focus{transform:translateY(-2px); box-shadow:0 14px 30px rgba(var(--accent-rgb),.10); opacity:1}
+.pub-downloads .doc-link:focus{outline:3px solid rgba(var(--accent-rgb),.10); outline-offset:4px}
+
+@media (max-width: 720px){
+  .pub-downloads{flex-direction:column; align-items:flex-start}
+  .pub-downloads .doc-link{width:100%; justify-content:center}
+}
+
 .book-grid{display:grid; grid-template-columns:repeat(2, 1fr); gap:1rem}
 .book-card{background:linear-gradient(150deg, rgba(255,255,255,.97), var(--surface)); border:1px solid rgba(var(--accent-rgb),.3); border-radius:1rem; padding:1rem; box-shadow:0 12px 26px rgba(116,104,94,.08)}
 .book-card .book-figure{margin:0 0 .75rem; border-radius:.9rem; overflow:hidden; box-shadow:0 16px 34px rgba(116,104,94,.1)}
