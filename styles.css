@@ -662,6 +662,7 @@ button.gcard:focus-visible{outline:3px solid rgba(var(--accent-rgb),.45); outlin
 .footer-icon{font-size:1rem; width:1.4rem; display:inline-flex; justify-content:center}
 .footer-contact a{color:#eef0ff}
 
+.footer-disclaimer{padding:.8rem 0; border-top:1px solid rgba(163,138,149,.15)}.footer-disclaimer p{margin:0; font-size:.75rem; color:rgba(220,215,234,.55); line-height:1.5}
 .footer-bottom{border-top:1px solid rgba(163,138,149,.25); padding:1.2rem 0 1.6rem}
 .footer-bottom-inner{display:flex; align-items:center; justify-content:space-between; gap:1rem; color:#dcd7ea; font-size:.9rem}
 .footer-bottom p{margin:0}
